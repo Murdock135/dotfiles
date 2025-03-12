@@ -1,0 +1,25 @@
+[user]
+    name = Zayan
+    email = zayan.qazi.mail@gmail.com
+[init]
+	defaultBranch = main
+[core]
+    editor = vim
+    autocrlf = input
+    safecrlf = true
+
+[alias]
+    co = checkout
+    br = branch
+    ci = commit
+    st = status
+
+[push]
+    default = simple
+
+[pull]
+    rebase = false
+
+[credential]
+    helper = cache
+

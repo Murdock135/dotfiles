@@ -1,0 +1,94 @@
+# ~/.common_shellrc: common shell configuration for Bash, Zsh, etc.
+
+###############################################################################
+# History and Environment
+###############################################################################
+export HISTCONTROL=ignoreboth      # Ignore duplicates & commands with leading spaces
+export HISTSIZE=1000               # Number of commands to remember
+export HISTFILESIZE=2000           # File size limit for stored history
+export HADOOP_HOME=$HOME/hadoop/hadoop-3.4.1
+export PATH=$HADOOP_HOME/bin:$PATH
+export PATH="$PATH:$HOME/go/bin"
+export PATH="$HOME/bin:$PATH"
+
+# Enable history appending and terminal resizing in Bash
+if [ -n "$BASH_VERSION" ]; then
+    shopt -s histappend
+    shopt -s checkwinsize
+fi
+
+# lesspipe integration
+[ -x /usr/bin/lesspipe ] && eval "$(SHELL=/bin/sh lesspipe)"
+
+# Identify debian_chroot
+if [ -z "$debian_chroot" ] && [ -r /etc/debian_chroot ]; then
+    debian_chroot=$(cat /etc/debian_chroot)
+fi
+
+###############################################################################
+# Aliases
+###############################################################################
+alias ls='ls --color=auto'
+alias ll='ls -alF'
+alias la='ls -A'
+alias l='ls -CF'
+alias vi='vim'
+alias egitignore='vi ~/.gitignore'
+alias dotfiles='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
+alias ebashrc='vi ~/.bashrc'
+alias zrepos='cd $HOME/Documents/code'
+alias zprepos='cd $HOME/Documents/code/personal_repos/'
+alias zorepos='cd $HOME/Documents/code/others_repos/'
+alias egitconf='vi ~/.gitconfig'
+alias sbashrc='source ~/.bashrc'
+alias gitconf='git config --list --show-origin'
+alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo error)" \
+"$(history|tail -n1|sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'' )"'
+
+# vim related
+alias vimrc='cat ~/.vimrc'
+alias evimrc='vi ~/.vimrc'
+alias vimcolors='ll /usr/share/vim/vim91/colors/'
+
+###############################################################################
+# Color Support
+###############################################################################
+if [ -x /usr/bin/dircolors ]; then
+    test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
+    alias ls='ls --color=auto'
+    alias grep='grep --color=auto'
+    alias fgrep='fgrep --color=auto'
+    alias egrep='egrep --color=auto'
+fi
+
+###############################################################################
+# NVM
+###############################################################################
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"
+[ -s "$NVM_DIR/bash_completion" ] && . "$NVM_DIR/bash_completion"
+
+###############################################################################
+# Prompt Configuration (Bash and Zsh)
+###############################################################################
+RED="\[\033[01;31m\]"
+GREEN="\[\033[01;32m\]"
+BLUE="\[\033[01;34m\]"
+YELLOW="\[\033[01;33m\]"
+MAGENTA="\[\033[01;35m\]"
+CYAN="\[\033[01;36m\]"
+WHITE="\[\033[01;37m\]"
+RESET="\[\033[00m\]"
+
+if [ -n "$BASH_VERSION" ]; then
+    # Bash prompt
+    PROMPT_COMMAND='PS1_CMD1=$(git branch --show-current 2>/dev/null)'
+    PS1="${CYAN}\s${RESET}:${GREEN}\u${RESET}@${YELLOW}\h${RESET}|${BLUE}\W${RESET}(${MAGENTA}\${PS1_CMD1}${RESET})\n\$ "
+elif [ -n "$ZSH_VERSION" ]; then
+    # Zsh prompt
+    autoload -Uz vcs_info
+    precmd() {
+        PS1_CMD1=$(git branch --show-current 2>/dev/null)
+    }
+    PS1="%F{cyan}%s%f:%F{green}%n%f@%F{yellow}%m%f|%F{blue}%~%f(%F{magenta}${PS1_CMD1}%f)\n%# "
+fi
