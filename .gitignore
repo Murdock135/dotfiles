@@ -1,0 +1,19 @@
+# Create a gitignore in your home directory
+cat > ~/.gitignore << EOL
+# Ignore everything by default
+*
+
+# Track specific dotfiles
+!.bashrc
+!.zshrc
+!.vimrc
+!.gitconfig
+!.gitignore
+!.tmux.conf
+
+# Track specific config directories
+!.config/nvim/
+
+# IMPORTANT: Ignore the bare repository itself
+Documents/code/personal_repos/.dotfiles
+
