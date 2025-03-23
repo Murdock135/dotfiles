@@ -14,6 +14,7 @@ cat > ~/.gitignore << EOL
 
 # Track specific config directories
 !.config/nvim/
+!.config/.oh-my-bash-custom/
 
 # IMPORTANT: Ignore the bare repository itself
 Documents/code/personal_repos/.dotfiles
