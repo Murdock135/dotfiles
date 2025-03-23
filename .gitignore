@@ -1,5 +1,3 @@
-# Create a gitignore in your home directory
-cat > ~/.gitignore << EOL
 # Ignore everything by default
 *
 
@@ -12,9 +10,16 @@ cat > ~/.gitignore << EOL
 !.gitignore
 !.tmux.conf
 
+# Include .config directory itself
+!.config/
+
+# But ignore everything inside .config by default
+.config/*
+
 # Track specific config directories
 !.config/nvim/
 !.config/.oh-my-bash-custom/
+!.config/.oh-my-bash-custom/**
 
 # IMPORTANT: Ignore the bare repository itself
 Documents/code/personal_repos/.dotfiles
