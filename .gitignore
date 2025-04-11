@@ -18,6 +18,7 @@
 
 # Track specific config directories
 !.config/nvim/
+!.config/nvim/**
 !.config/.oh-my-bash-custom/
 !.config/.oh-my-bash-custom/**
 

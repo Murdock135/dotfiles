@@ -161,4 +161,14 @@ export NVM_DIR="$HOME/.nvm"
 # alias bashconfig="mate ~/.bashrc"
 # alias ohmybash="mate ~/.oh-my-bash"
 alias dotfiles='/usr/bin/git --git-dir=$HOME/Documents/code/personal_repos/.dotfiles --work-tree=$HOME'
-
+alias vi='nvim'
+export JAVA_HOME=/usr/lib/jvm/java-11-openjdk-amd64
+export PATH=$JAVA_HOME/bin:$PATH
+export HADOOP_HOME=/home/ubuntu/hadoop
+export HADOOP_CONF_DIR=/etc/hadoop
+export HADOOP_MAPRED_HOME=
+export HADOOP_YARN_HOME=
+export HADOOP_COMMON_HOME=
+export HADOOP_HDFS_HOME=
+export PATH=/home/zayan/bin:/home/zayan/.nvm/versions/node/v23.9.0/bin:/home/linuxbrew/.linuxbrew/bin:/home/linuxbrew/.linuxbrew/sbin:/home/zayan/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/snap/bin:/home/zayan/go/bin:/opt/nvim-linux-x86_64/bin:/bin:/sbin
+export JAVA_HOME=/usr/lib/jvm/java-11-openjdk-amd64
