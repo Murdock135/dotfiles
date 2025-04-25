@@ -128,6 +128,11 @@ export PATH="$PATH:$GOBIN"
 export LLM_API_PATH="$HOME/.secrets/.llm_apis"
 export PATH="$PATH:/opt/nvim-linux-x86_64/bin"
 
+# Pyenv stuff
+export PYENV_ROOT="$HOME/.pyenv" >> ~/.bashrc
+[[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH" >> ~/.bashrc
+eval "$(pyenv init - bash)" >> ~/.bashrc
+
 eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)" # Homebrew
 eval "$(starship init bash)" # starship
 
