@@ -1,5 +1,4 @@
 {
-  "habamax.nvim": { "branch": "master", "commit": "4a4105aea429fca3cb5ebcca584e21b9af2ae265" },
   "lazy.nvim": { "branch": "main", "commit": "6c3bda4aca61a13a9c63f1c1d1b16b9d3be90d7a" },
-  "lush.nvim": { "branch": "main", "commit": "45a79ec4acb5af783a6a29673a999ce37f00497e" }
+  "sequoia.nvim": { "branch": "master", "commit": "912da0ff5b9247b974895672cc62d3c471cb1a6e" }
 }
