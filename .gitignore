@@ -9,6 +9,7 @@
 !.gitconfig
 !.gitignore
 !.tmux.conf
+!dotfiles_init.sh
 
 !install_scripts/
 !install_scripts/*
