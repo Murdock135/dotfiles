@@ -10,7 +10,7 @@
 !.gitignore
 !.tmux.conf
 
-!install_scripts/
+!install_scripts/*
 
 # Include .config directory itself
 !.config/
