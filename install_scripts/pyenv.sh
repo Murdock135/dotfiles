@@ -16,3 +16,14 @@ fi
 if ! grep -q 'eval "$(pyenv init - zsh)"' ~/.zshrc; then
     echo 'eval "$(pyenv init - zsh)"' >> ~/.zshrc
 fi
+
+# Reload shell configuration to apply pyenv setup
+source ~/.zshrc
+
+# Install pyenv-virtualenv if not already installed
+if ! brew list pyenv-virtualenv &> /dev/null; then
+    echo "pyenv-virtualenv is not installed. Installing..."
+    brew install pyenv-virtualenv
+else
+    echo "pyenv-virtualenv is already installed."
+fi

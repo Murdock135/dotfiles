@@ -3,8 +3,8 @@
 
 # Track specific dotfiles
 !.profile
-#!.bashrc
-#!.zshrc
+# !.bashrc
+# !.zshrc
 !.vimrc
 !.gitconfig
 !.gitignore
