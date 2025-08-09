@@ -1,4 +1,2 @@
-require("zayan.settings")
-require("zayan.remap")
-require("zayan.lazy")
-
+-- bootstrap lazy.nvim, LazyVim and your plugins
+require("config.lazy")

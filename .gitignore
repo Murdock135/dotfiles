@@ -23,6 +23,8 @@
 # Track specific config directories
 !.config/nvim/
 !.config/nvim/**
+!.config/nvim.bak
+!.config/nvim.bak/**
 !.config/.oh-my-bash-custom/
 !.config/.oh-my-bash-custom/**
 
