@@ -1,0 +1,16 @@
+uv
+git
+visual-studio-code-bin
+neovim
+stow
+curl
+wget
+htop
+alacritty
+discord
+zen-browser-bin
+docker
+docker-compose
+docker-buildx
+zotero
+spotify
