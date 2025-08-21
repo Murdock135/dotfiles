@@ -1,18 +1,30 @@
+alias sbash='source ~/.bashrc'
+alias szsh='source ~/.zshrc'
+alias src='[ -n "$ZSH_VERSION" ] && source ~/.zshrc || source ~/.bashrc'
+
+alias tree="eza --tree --level=3 -la --group-directories-first --ignore-glob='.git'"
+alias ag='alias | grep'
+
+# Git
 alias gst='git status'
 alias gaa='git add --all'
 alias gc='git commit'
 alias gp='git push'
 alias gpr='git pull --rebase'
 alias gd='git diff'
-alias gcb='git checkout branch'
+alias gcb='git checkout -b' # safer
 alias gba='git branch --all'
 alias grv='git remote --verbose'
 alias gco='git checkout'
 alias gl='git log --oneline --graph --decorate'
+
+# Navigation
 alias mine='cd ~/Documents/code/mine/'
 alias theirs='cd ~/Documents/code/external/'
 alias ..="cd .."
 alias ~="cd ~"
+
+# Utils
 alias c="clear"
 alias grep="grep --color=auto"
 alias pingg="ping google.com"
