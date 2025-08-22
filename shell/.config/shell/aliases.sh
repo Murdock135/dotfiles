@@ -23,6 +23,8 @@ alias mine='cd ~/Documents/code/mine/'
 alias theirs='cd ~/Documents/code/external/'
 alias ..="cd .."
 alias ~="cd ~"
+alias dots="cd ~/dotfiles/"
+alias config="eza -la ~/.config/"
 
 # Utils
 alias c="clear"

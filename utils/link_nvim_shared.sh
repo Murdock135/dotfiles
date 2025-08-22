@@ -12,7 +12,7 @@ REPO_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 SRC_DIR="$REPO_ROOT/nvim/.config/nvim/lua/zayan"
 DEST_DIR="$REPO_ROOT/nvim_omarchy/.config/nvim/lua/config"
 
-FILES=("options.lua" "keymaps.lua") # add more if needed
+FILES=("options.lua" "keymaps.lua" "plugins") # add more if needed
 
 mkdir -p "$DEST_DIR"
 
@@ -20,7 +20,7 @@ for file in "${FILES[@]}"; do
   src="$SRC_DIR/$file"
   dest="$DEST_DIR/$file"
 
-  if [[ ! -f "$src" ]]; then
+  if [[ ! -e "$src" ]]; then
     echo "⚠️  Skipping $file (not found in $SRC_DIR)"
     continue
   fi
