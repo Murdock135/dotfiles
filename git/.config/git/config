@@ -1,0 +1,9 @@
+[user]
+  name = Zayan
+  email = zayan.qazi.mail@gmail.com
+
+[init]
+  defaultBranch = main
+
+[pull]
+  rebase = true
