@@ -1,4 +1,5 @@
 uv
+starship
 git
 visual-studio-code-bin
 neovim
@@ -9,7 +10,6 @@ htop
 alacritty
 discord
 zen-browser-bin
-docker
 docker-compose
 docker-buildx
 zotero
