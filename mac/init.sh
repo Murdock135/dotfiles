@@ -14,11 +14,20 @@ echo "🚀 Starting macOS init"
 # Confirm DOTFILES_DIR
 DOTFILES_DIR="${DOTFILES_DIR:-$HOME/mydotfiles}"
 echo "Your dotfiles directory is: $DOTFILES_DIR"
-read -r -p "Is this the correct directory? (y/n): " response
-if [ "$response" != "y" ] && [ "$response" != "Y" ]; then
-  echo "Exiting. Please update DOTFILES_DIR manually and rerun."
-  exit 1
-fi
+printf "Is this the correct directory? (y/n): "
+read -r response
+
+case "$response" in
+  y|Y) ;; # continue
+  n|N)
+    echo "Exiting. Please update DOTFILES_DIR manually and rerun."
+    exit 1
+    ;;
+  *)
+    echo "Invalid response. Please answer y or n."
+    exit 1
+    ;;
+esac
 
 # Ask for sudo upfront and keep alive
 sudo -v
@@ -60,7 +69,6 @@ case "$response" in
     exit 1
     ;;
 esac
-
 
 ln -sf "$REPO_ROOT/bash/.bashrc" "$HOME/.bashrc"
 ln -sf "$REPO_ROOT/bash/.bash_profile" "$HOME/.bash_profile"
