@@ -15,7 +15,12 @@ This folder contains setup scripts for macOS. The parent directory contains my d
 
 All scripts live in [`mac/`](./mac). Run them in order (Note: Make sure they are executable. You can use the `chmod +x` command.):
 
-1. **Bootstrap system (Xcode Command Line Tools + default shell = bash)**
+1. Make the scripts executable
+```
+chmod +x ./mac/*.sh
+```
+
+2. **Bootstrap system (Xcode Command Line Tools + default shell = bash)**
    ```sh
    ./mac/init.sh
 
@@ -36,10 +41,22 @@ All scripts live in [`mac/`](./mac). Run them in order (Note: Make sure they are
 ```
 ./mac/install_packages.sh
 ```
+
+
+4. Stow shell shims
+
 ```
+cd ~/mydotfiles
+stow -t "$HOME" mac/home 
 ```
 
-4. Stow dotfiles into `~/.config`
+Optional quick check
+
+```
+ls -l ~/.bash_profile ~/.bashrc
+```
+
+5. Stow rest of the dotfiles into `~/.config` by running setup.sh
 
 ```
 ./mac/setup.sh
@@ -54,3 +71,12 @@ brew bundle --file=~/mydotfiles/mac/Brewfile
 # To reapply dotfiles symlinks with stow
 
 `./mac/setup.sh`
+
+# Quick verification
+
+```
+echo "$SHELL"
+echo "$0"
+type brew
+type stow
+```
