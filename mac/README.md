@@ -30,7 +30,9 @@ chmod +x ./mac/*.sh
 
 - Sets /bin/bash as your login shell (log out / back in to take effect)
 
-2. Install Homebrew
+- Symlinks home/.bashrc and home/.bash_profile into ~
+
+1. Install Homebrew
 
 ```
 ./mac/brew.sh

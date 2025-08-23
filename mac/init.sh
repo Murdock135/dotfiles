@@ -35,6 +35,13 @@ else
   echo "✅ Default shell already /bin/bash."
 fi
 
+# 3) Symlink .bashrc and .bash_profile
+REPO_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd -P)"
+echo "REPO_ROOT: $REPO_ROOT"
+ln -sf "$REPO_ROOT/bash/.bashrc" "$HOME/.bashrc"
+ln -sf "$REPO_ROOT/bash/.bash_profile" "$HOME/.bash_profile"
+echo "✅ Symlinked .bashrc and .bash_profile to mac/home shims"
+
 # silence Apple's zsh MOTD
 [ -f "$HOME/.hushlogin" ] || touch "$HOME/.hushlogin"
 

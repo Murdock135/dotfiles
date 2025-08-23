@@ -2,7 +2,7 @@
 
 BASHRC="$HOME/.bashrc"
 LOAD_FILE="$HOME/.config/shell/load.sh"
-SOURCE_CMD="source $LOAD_FILE"
+SOURCE_CMD=". $LOAD_FILE"
 
 # Ensure .bashrc sources *this* load.sh
 if ! grep -Fxq "$SOURCE_CMD" "$BASHRC"; then
