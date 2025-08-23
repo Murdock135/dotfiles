@@ -1,42 +1,36 @@
-#!/bin/zsh
-
+#!/bin/bash
+# =============================================================================
+# setup.sh
+# -----------------------------------------------------------------------------
+# Purpose:
+#   Stow dotfiles into ~/.config
+# =============================================================================
 set -euo pipefail
 
-# -----------------------------
-# setup.sh (run under zsh)
-# Installs Xcode CLT + switches default shell to bash
-# -----------------------------
+DOTFILES_DIR="${DOTFILES_DIR:-$HOME/dotfiles}"
+PACKAGES=(shell nvim git) # extend as needed
 
-echo "🚀 Starting macOS setup (setup.sh)"
-
-# Ask for sudo upfront
-sudo -v
-while true; do
-  sudo -n true
-  sleep 60
-  kill -0 "$$" || exit
-done 2>/dev/null &
-
-# 1. Ensure Xcode Command Line Tools
-if ! xcode-select -p >/dev/null 2>&1; then
-  echo "🛠 Installing Xcode Command Line Tools..."
-  xcode-select --install || true
-  echo "⚠️ A GUI popup appeared. Finish installing, then re-run this script."
+if ! command -v stow >/dev/null 2>&1; then
+  echo "❌ stow not installed. Run ./mac/install_packages.sh first or install stow manually."
   exit 1
-else
-  echo "✅ Xcode Command Line Tools already installed."
 fi
 
-# 2. Switch default shell to /bin/bash
-if [[ "$SHELL" != "/bin/bash" ]]; then
-  echo "🐚 Changing default shell to /bin/bash..."
-  if ! grep -q "/bin/bash" /etc/shells; then
-    echo "/bin/bash" | sudo tee -a /etc/shells >/dev/null
-  fi
-  chsh -s /bin/bash
-  echo "ℹ️ Default shell changed to /bin/bash. Log out and log back in for it to take effect."
-else
-  echo "✅ Default shell already /bin/bash."
+if [[ ! -d "$DOTFILES_DIR" ]]; then
+  echo "❌ Dotfiles repo not found at $DOTFILES_DIR"
+  exit 1
 fi
+
+mkdir -p "$HOME/.config"
+
+cd "$DOTFILES_DIR"
+echo "📂 Stowing packages into ~ ..."
+for pkg in "${PACKAGES[@]}"; do
+  if [[ -d "$pkg" ]]; then
+    echo "• stow $pkg"
+    stow -t "$HOME" "$pkg"
+  else
+    echo "⚠️ Skipping $pkg (directory not found)."
+  fi
+done
 
 echo "✅ setup.sh complete."
