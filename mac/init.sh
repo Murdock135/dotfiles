@@ -35,9 +35,15 @@ else
   echo "✅ Default shell already /bin/bash."
 fi
 
-# 3) Symlink .bashrc and .bash_profile
-REPO_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd -P)"
+# 3) Symlink .bashrc and .bash_profile into ~
+REPO_ROOT="$(cd "$(dirname "$0")/.." && pwd)"
 echo "REPO_ROOT: $REPO_ROOT"
+read -p "Is this the correct dotfiles directory? (y/n): " answer
+if [[ "$answer" != "y" && "$answer" != "Y" ]]; then
+  echo "Please manually change REPO_ROOT in mac/init.sh and try again."
+  exit 1
+fi
+
 ln -sf "$REPO_ROOT/bash/.bashrc" "$HOME/.bashrc"
 ln -sf "$REPO_ROOT/bash/.bash_profile" "$HOME/.bash_profile"
 echo "✅ Symlinked .bashrc and .bash_profile to mac/home shims"
