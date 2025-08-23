@@ -1,0 +1,3 @@
+These are packages that cannot be installed from a CLI.
+
+1. Docker
