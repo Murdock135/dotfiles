@@ -33,7 +33,4 @@ for pkg in "${PACKAGES[@]}"; do
   fi
 done
 
-# Patch .bashrc with load.sh
-~/.config/shell/load.sh
-
 echo "✅ setup.sh complete."

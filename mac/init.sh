@@ -66,4 +66,4 @@ echo "✅ Symlinked ~/.bashrc and ~/.bash_profile to mac/home shims"
 # 4) Silence Apple's zsh MOTD
 [ -f "$HOME/.hushlogin" ] || touch "$HOME/.hushlogin"
 
-echo "✅ init.sh complete."
+echo "✅ init.sh complete. Restart your terminal or log out/in to apply changes."
