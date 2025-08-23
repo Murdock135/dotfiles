@@ -6,28 +6,12 @@
 #   Bootstrap macOS:
 #     1) Install Xcode Command Line Tools
 #     2) Set /bin/bash as the default login shell
+#     3) Symlink .bashrc and .bash_profile shims into $HOME
+#     4) Silence Apple's zsh MOTD
 # =============================================================================
 set -euo pipefail
 
 echo "🚀 Starting macOS init"
-
-# Confirm DOTFILES_DIR
-DOTFILES_DIR="${DOTFILES_DIR:-$HOME/mydotfiles}"
-echo "Your dotfiles directory is: $DOTFILES_DIR"
-printf "Is this the correct directory? (y/n): "
-read -r response
-
-case "$response" in
-  y|Y) ;; # continue
-  n|N)
-    echo "Exiting. Please update DOTFILES_DIR manually and rerun."
-    exit 1
-    ;;
-  *)
-    echo "Invalid response. Please answer y or n."
-    exit 1
-    ;;
-esac
 
 # Ask for sudo upfront and keep alive
 sudo -v
@@ -59,23 +43,27 @@ echo "REPO_ROOT: $REPO_ROOT"
 printf "Is this the correct root directory for your dotfiles? (y/n): "
 read -r response
 case "$response" in
-  y|Y) ;; # continue
-  n|N)
-    echo "Exiting. Please fix REPO_ROOT in mac/init.sh and rerun."
-    exit 1
-    ;;
-  *)
-    echo "Invalid response. Please answer y or n."
-    exit 1
-    ;;
+  y|Y) ;; 
+  n|N) echo "Exiting. Please adjust REPO_ROOT logic and rerun."; exit 1 ;;
+  *)   echo "Invalid response. Please answer y or n."; exit 1 ;;
 esac
 
-ln -sf "$REPO_ROOT/bash/.bashrc" "$HOME/.bashrc"
-ln -sf "$REPO_ROOT/bash/.bash_profile" "$HOME/.bash_profile"
-echo "✅ Symlinked .bashrc and .bash_profile to mac/home shims"
+SRC_BASHRC="$REPO_ROOT/mac/home/.bashrc"
+SRC_PROFILE="$REPO_ROOT/mac/home/.bash_profile"
 
-# silence Apple's zsh MOTD
+if [[ ! -f "$SRC_BASHRC" || ! -f "$SRC_PROFILE" ]]; then
+  echo "❌ Expected shim files not found:"
+  echo "   $SRC_BASHRC"
+  echo "   $SRC_PROFILE"
+  echo "Make sure they exist in mac/home/ and try again."
+  exit 1
+fi
+
+ln -sf "$SRC_BASHRC"   "$HOME/.bashrc"
+ln -sf "$SRC_PROFILE"  "$HOME/.bash_profile"
+echo "✅ Symlinked ~/.bashrc and ~/.bash_profile to mac/home shims"
+
+# 4) Silence Apple's zsh MOTD
 [ -f "$HOME/.hushlogin" ] || touch "$HOME/.hushlogin"
 
 echo "✅ init.sh complete."
-
