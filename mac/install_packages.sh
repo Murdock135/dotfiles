@@ -7,7 +7,7 @@
 # =============================================================================
 set -euo pipefail
 
-DOTFILES_DIR="${DOTFILES_DIR:-$HOME/dotfiles}"
+DOTFILES_DIR="${DOTFILES_DIR:-$HOME/mydotfiles}"
 BREWFILE_PATH="$DOTFILES_DIR/mac/Brewfile"
 
 if ! command -v brew >/dev/null 2>&1; then
