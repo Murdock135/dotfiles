@@ -14,7 +14,7 @@ It uses [GNU Stow](https://www.gnu.org/software/stow/) to symlink configuration 
 
 ## 🚀 Setup Steps
 
-All scripts live in [`mac/`](./mac). Run them in order:
+All scripts live in [`mac/`](./mac). Run them in order (Note: Make sure they are executable. You can use the `chmod +x` command.):
 
 1. **Bootstrap system (Xcode Command Line Tools + default shell = bash)**
    ```sh
