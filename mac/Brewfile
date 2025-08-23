@@ -1,5 +1,7 @@
 brew "git"
 brew "gh"
+brew "stow"
+brew "eza"
 brew "neovim"
 brew "tmux"
 brew "uv"
