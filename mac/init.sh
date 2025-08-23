@@ -35,5 +35,14 @@ else
   echo "✅ Default shell already /bin/bash."
 fi
 
+# 3) create .bashrc and .bash_profile
+if [ ! -f "$HOME/.bash_profile" ]; then
+  touch "$HOME/.bash_profile"
+fi
+
+if [ ! -f "$HOME/.bashrc" ]; then
+  touch "$HOME/.bashrc"
+fi
+
 echo "✅ init.sh complete."
 
