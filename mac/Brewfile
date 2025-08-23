@@ -25,3 +25,6 @@ cask "google-drive"
 cask "chatgpt"
 cask "font-fira-code-nerd-font"
 cask "rectangle"
+
+tap "nikitabobko/tap"
+cask "aerospace"
