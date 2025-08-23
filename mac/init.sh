@@ -11,6 +11,15 @@ set -euo pipefail
 
 echo "🚀 Starting macOS init"
 
+# Confirm DOTFILES_DIR
+DOTFILES_DIR="${DOTFILES_DIR:-$HOME/mydotfiles}"
+echo "Your dotfiles directory is: $DOTFILES_DIR"
+read -r -p "Is this the correct directory? (y/n): " response
+if [ "$response" != "y" ] && [ "$response" != "Y" ]; then
+  echo "Exiting. Please update DOTFILES_DIR manually and rerun."
+  exit 1
+fi
+
 # Ask for sudo upfront and keep alive
 sudo -v
 while true; do sudo -n true; sleep 60; kill -0 "$$" || exit; done 2>/dev/null &
@@ -36,13 +45,22 @@ else
 fi
 
 # 3) Symlink .bashrc and .bash_profile into ~
-REPO_ROOT="$(cd "$(dirname "$0")/.." && pwd)"
+REPO_ROOT="$(cd "$(dirname "$0")/.." && pwd -P)"
 echo "REPO_ROOT: $REPO_ROOT"
-read -p "Is this the correct dotfiles directory? (y/n): " answer
-if [[ "$answer" != "y" && "$answer" != "Y" ]]; then
-  echo "Please manually change REPO_ROOT in mac/init.sh and try again."
-  exit 1
-fi
+printf "Is this the correct root directory for your dotfiles? (y/n): "
+read -r response
+case "$response" in
+  y|Y) ;; # continue
+  n|N)
+    echo "Exiting. Please fix REPO_ROOT in mac/init.sh and rerun."
+    exit 1
+    ;;
+  *)
+    echo "Invalid response. Please answer y or n."
+    exit 1
+    ;;
+esac
+
 
 ln -sf "$REPO_ROOT/bash/.bashrc" "$HOME/.bashrc"
 ln -sf "$REPO_ROOT/bash/.bash_profile" "$HOME/.bash_profile"
