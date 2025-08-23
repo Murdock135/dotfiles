@@ -19,6 +19,8 @@ alias gco='git checkout'
 alias gl='git log --oneline --graph --decorate'
 
 # Navigation
+alias ls='eza -lh --group-directories-first --icons=auto'
+alias lsa='ls -a'
 alias mine='cd ~/Documents/code/mine/'
 alias theirs='cd ~/Documents/code/external/'
 alias ..="cd .."
