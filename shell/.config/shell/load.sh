@@ -17,14 +17,14 @@ fi
 # --- Modular sourcing starts here ---
 
 # Aliases
-[ -f "$HOME/.config/shell/aliases.sh" ] && source "$HOME/.config/shell/aliases.sh"
+[ -f "$HOME/.config/shell/aliases.sh" ] && . "$HOME/.config/shell/aliases.sh"
 
 # Env vars
-[ -f "$HOME/.config/shell/env.sh" ] && source "$HOME/.config/shell/env.sh"
+[ -f "$HOME/.config/shell/env.sh" ] && . "$HOME/.config/shell/env.sh"
 
 # All function scripts
 if [ -d "$HOME/.config/shell/functions" ]; then
   for f in "$HOME/.config/shell/functions/"*.sh; do
-    [ -f "$f" ] && source "$f"
+    [ -f "$f" ] && . "$f"
   done
 fi
