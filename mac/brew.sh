@@ -21,9 +21,14 @@ fi
 
 # Put brew in this session
 if [[ -x "/opt/homebrew/bin/brew" ]]; then
+  echo 'eval "$(/opt/homebrew/bin/brew shellenv)"' >> "$HOME/.bash_profile"
   eval "$(/opt/homebrew/bin/brew shellenv)"
 elif [[ -x "/usr/local/bin/brew" ]]; then
+  echo 'eval "$(/usr/local/bin/brew shellenv)"' >> "$HOME/.bash_profile"
   eval "$(/usr/local/bin/brew shellenv)"
+else
+  echo "❌ Can't find brew after installation!"
+  exit 1
 fi
 
 echo "✅ brew.sh complete."

@@ -7,8 +7,8 @@
 # =============================================================================
 set -euo pipefail
 
-DOTFILES_DIR="${DOTFILES_DIR:-$HOME/dotfiles}"
-PACKAGES=(shell nvim git) # extend as needed
+DOTFILES_DIR="${DOTFILES_DIR:-$HOME/mydotfiles}"
+PACKAGES=(git nvim shell) # extend as needed
 
 if ! command -v stow >/dev/null 2>&1; then
   echo "❌ stow not installed. Run ./mac/install_packages.sh first or install stow manually."
