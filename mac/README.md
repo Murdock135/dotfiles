@@ -1,7 +1,6 @@
 # Dotfiles (macOS)
 
-This repo contains my personal dotfiles and setup scripts for macOS.  
-It uses [GNU Stow](https://www.gnu.org/software/stow/) to symlink configuration files into `~/.config`.
+This folder contains setup scripts for macOS. The parent directory contains my dotfiles, which are meant to be symlinked with GNU stow into `~/.config/`. 
 
 ---
 
