@@ -27,6 +27,7 @@ alias ..="cd .."
 alias ~="cd ~"
 alias dots="cd ~/dotfiles/"
 alias config="eza -la ~/.config/"
+alias where='pwd'
 
 # Utils
 alias c="clear"
