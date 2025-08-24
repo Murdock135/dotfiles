@@ -24,6 +24,7 @@ cask "onedrive"
 cask "google-drive"
 cask "chatgpt"
 cask "font-fira-code-nerd-font"
+cask "font-droid-sans-mono-nerd-font"
 cask "rectangle"
 
 tap "nikitabobko/tap"
