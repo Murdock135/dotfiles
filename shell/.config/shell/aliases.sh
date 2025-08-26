@@ -42,3 +42,11 @@ alias path='echo -e ${PATH//:/\\n}'
 alias h="history | grep"
 alias j="jobs -l"
 alias vi="nvim"
+
+# Docker
+alias d='docker'
+alias dps='docker ps'
+alias di='docker images'
+alias dcl='docker container ls'
+alias drm='docker rm'   # remove container
+alias dst='docker stop' # stop container
