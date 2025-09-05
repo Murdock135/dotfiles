@@ -28,6 +28,7 @@ alias ~="cd ~"
 alias dots="cd ~/dotfiles/"
 alias config="eza -la ~/.config/"
 alias where='pwd'
+alias alacrittyconf='vi ~/.config/alacritty/alacritty.toml'
 
 # Utils
 alias c="clear"
