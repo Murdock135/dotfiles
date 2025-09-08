@@ -1,9 +1,9 @@
 return {
-	{ "Mofiqul/vscode.nvim" },
+	{ "EdenEast/nightfox.nvim" },
 	{
 		"LazyVim/LazyVim",
 		opts = {
-			colorscheme = "vscode",
+			colorscheme = "nightfox",
 		},
 	},
 }
