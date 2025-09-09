@@ -23,6 +23,7 @@ alias ls='eza -lh --group-directories-first --icons=auto'
 alias lsa='ls -a'
 alias mine='cd ~/Documents/code/mine/'
 alias theirs='cd ~/Documents/code/theirs/'
+alias vaults='cd ~/Documents/obsidian_vaults/'
 alias ..="cd .."
 alias ~="cd ~"
 alias dots="cd ~/dotfiles/"
