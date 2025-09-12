@@ -3,7 +3,9 @@
   email = zayan.qazi.mail@gmail.com
 
 [init]
-  defaultBranch = main
+	defaultBranch = main
 
 [pull]
   rebase = true
+[fetch]
+	prune = true

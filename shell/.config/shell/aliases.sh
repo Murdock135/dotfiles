@@ -47,7 +47,7 @@ alias vi="nvim"
 
 # Docker
 alias d='docker'
-alias dps='docker ps'
+alias dps='docker ps -a'
 alias di='docker images'
 alias dcl='docker container ls'
 alias drm='docker rm'   # remove container
