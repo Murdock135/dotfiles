@@ -7,8 +7,8 @@
 # =============================================================================
 set -euo pipefail
 
-DOTFILES_DIR="${DOTFILES_DIR:-$HOME/mydotfiles}"
-PACKAGES=(git nvim shell) # extend as needed
+DOTFILES_DIR="${DOTFILES_DIR:-$HOME/dotfiles}"
+PACKAGES=(git nvim shell alacritty) # extend as needed
 
 if ! command -v stow >/dev/null 2>&1; then
   echo "❌ stow not installed. Run ./mac/install_packages.sh first or install stow manually."
@@ -27,7 +27,7 @@ echo "📂 Stowing packages into ~ ..."
 for pkg in "${PACKAGES[@]}"; do
   if [[ -d "$pkg" ]]; then
     echo "• stow $pkg"
-    stow -t "$HOME" "$pkg"
+    stow -t "$HOME" -R "$pkg"
   else
     echo "⚠️ Skipping $pkg (directory not found)."
   fi
