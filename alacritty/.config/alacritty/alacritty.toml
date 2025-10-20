@@ -6,6 +6,6 @@ size = 14
 normal = { family = "DroidSansM Nerd Font Mono", style = "Regular"}
 
 [window]
-opacity = 0.65
+opacity = 0.85
 blur = true
 startup_mode = "Maximized"
