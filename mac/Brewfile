@@ -12,6 +12,9 @@ brew "starship"
 brew "lua-language-server"
 brew "python-lsp-server"
 
+brew "tree-sitter"
+brew "tree-sitter-cli"
+
 cask "raycast"
 cask "visual-studio-code"
 cask "obsidian"
