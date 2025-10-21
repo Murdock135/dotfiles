@@ -1,1 +1,1 @@
-vim.keymap.set('n', '<C-w>', ':Neotree toggle<CR>', { noremap = true , silent = true }, { desc = "Toggle Neotree" })
+vim.keymap.set('n', '<C-w> <C-w>', ':Neotree toggle<CR>', { noremap = true , silent = true }, { desc = "Toggle Neotree" })

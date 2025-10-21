@@ -6,7 +6,12 @@ brew "neovim"
 brew "tmux"
 brew "uv"
 brew "ollama"
+brew "mise"
 brew "starship"
+
+brew "lua-language-server"
+brew "python-lsp-server"
+
 cask "raycast"
 cask "visual-studio-code"
 cask "obsidian"
