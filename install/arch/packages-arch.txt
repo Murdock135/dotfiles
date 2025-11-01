@@ -9,6 +9,7 @@ obsidian
 zoom
 visual-studio-code-bin
 neovim
+ttf-sourcecodepro-nerd
 stow
 curl
 wget
@@ -24,3 +25,4 @@ lazydocker
 zotero
 spotify
 fastfetch
+appimagelauncher

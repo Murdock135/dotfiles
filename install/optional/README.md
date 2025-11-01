@@ -1,3 +1,5 @@
+> Note: Some packages need to be installed manually. Those are listed in `manual_install_list.txt`
+
 To enable any package, simply run 
 
 ```
