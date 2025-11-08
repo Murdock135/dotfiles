@@ -1,12 +1,12 @@
 [general]
-import = ["~/dotfiles/alacritty/.config/alacritty/carbonfox-theme.toml"]
+import = ["~/dotfiles/alacritty/.config/alacritty/github-dark.toml"]
 
 [font]
-size = 14
+size = 12
 # normal = { family = "DroidSansM Nerd Font Mono", style = "Regular"}
 normal = { family = "SauceCodePro Nerd Font Mono", style = "Regular"}
 
 [window]
-opacity = 0.85
+opacity = 0.75
 blur = true
 startup_mode = "Maximized"
