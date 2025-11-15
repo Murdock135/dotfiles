@@ -10,6 +10,7 @@ zoom
 visual-studio-code-bin
 neovim
 ttf-sourcecodepro-nerd
+otf-droid-nerd
 stow
 curl
 wget
