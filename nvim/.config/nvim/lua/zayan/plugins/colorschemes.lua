@@ -1,4 +1,5 @@
 return {
+  {
     "sainnhe/gruvbox-material",
     -- enabled = true,
     -- priority = 1000,
@@ -12,4 +13,11 @@ return {
         vim.g.gruvbox_material_cursor = "auto"
         -- vim.cmd.colorscheme("gruvbox-material")
     end,
+  },
+  {
+    "diegoulloao/neofusion.nvim",
+    opts = {
+      transparent_mode = true,
+    },
+  },
 }
