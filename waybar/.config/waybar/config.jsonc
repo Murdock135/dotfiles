@@ -154,7 +154,7 @@
     "on-click": "blueman-manager"
   },
 
-  // Audio with volume slider
+  // Audio with volume slider (SwayOSD)
   "pulseaudio": {
     "format": "{icon} {volume}%",
     "format-muted": "󰖁",
@@ -162,16 +162,18 @@
       "default": ["", "", ""]
     },
     "scroll-step": 5,
+    "on-scroll-up": "swayosd-client --output-volume raise",
+    "on-scroll-down": "swayosd-client --output-volume lower",
     "on-click": "pavucontrol",
-    "on-click-right": "pactl set-sink-mute @DEFAULT_SINK@ toggle"
+    "on-click-right": "swayosd-client --output-volume mute-toggle"
   },
 
-  // Brightness slider
+  // Brightness slider (SwayOSD)
   "backlight": {
     "format": "{icon} {percent}%",
     "format-icons": ["", "", "", "", ""],
-    "on-scroll-up": "brightnessctl set 5%+",
-    "on-scroll-down": "brightnessctl set 5%-"
+    "on-scroll-up": "swayosd-client --brightness raise",
+    "on-scroll-down": "swayosd-client --brightness lower"
   },
 
   // Notification center with DND
