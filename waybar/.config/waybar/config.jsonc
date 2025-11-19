@@ -12,10 +12,10 @@
     // Module Layout
     "modules-left": [
         "custom/arch",
-        "river/tags"
+        "ext/workspaces"
     ],
     "modules-center": [
-        "river/window"
+        "dwl/window"
     ],
     "modules-right": [
         "clock",
@@ -33,18 +33,19 @@
         "on-click": "rofi -show drun"
     },
 
-    // Workspace/Tags Indicators (using River tags for MangoWM compatibility)
-    "river/tags": {
-        "num-tags": 9,
-        "tag-labels": ["1", "2", "3", "4", "5", "6", "7", "8", "9"]
+    // Workspace/Tags Indicators (MangoWM ext/workspaces module)
+    "ext/workspaces": {
+        "format": "{id}",
+        "on-click": "activate",
+        "sort-by-id": true,
+        "all-outputs": false,
+        "active-only": false
     },
 
-    // Center - Window Title/Indicator
-    "river/window": {
-        "format": "{}",
+    // Center - Window Title/Indicator (MangoWM dwl/window module)
+    "dwl/window": {
+        "format": "{title}",
         "max-length": 50,
-        "icon": true,
-        "icon-size": 18,
         "separate-outputs": false
     },
 

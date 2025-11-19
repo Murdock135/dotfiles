@@ -38,6 +38,9 @@ Required packages:
 # Arch Linux / Manjaro
 sudo pacman -S waybar rofi brightnessctl networkmanager pulseaudio bluez bluez-utils
 
+# IMPORTANT: Waybar 0.14.0+ required for ext/workspaces module support
+# Check version: waybar --version
+
 # Optional but recommended
 sudo pacman -S pavucontrol blueman nm-connection-editor
 sudo pacman -S ttf-font-awesome ttf-jetbrains-mono-nerd
@@ -74,7 +77,7 @@ The color scheme uses MangoWM's cyan focus color (`#42f5dd`). Edit `style.css` t
 
 ```css
 /* Active workspace color */
-#tags button.focused {
+#ext-workspaces button.focused {
     background: linear-gradient(135deg, #42f5dd 0%, #36c9b5 100%);
 }
 
@@ -86,16 +89,30 @@ window#waybar {
 
 ### Workspace Module
 
-MangoWM uses the River protocol for workspace management. If you experience issues, you can alternatively use:
+MangoWM uses the `ext/workspaces` module (requires Waybar 0.14.0+) for workspace management. If you're using an older version of Waybar or experience issues, you can alternatively use:
 
-- `wlr/workspaces` for generic wlroots support
-- Custom dwl-tags module (if available)
+- `dwl/tags` - Legacy DWL module for tags (built into MangoWM)
+- `wlr/workspaces` - Generic wlroots support (may have limited functionality)
 
 Edit `config.jsonc`:
 ```json
+// Option 1: ext/workspaces (recommended, requires Waybar 0.14.0+)
 "modules-left": [
     "custom/arch",
-    "wlr/workspaces"  // Alternative workspace module
+    "ext/workspaces"
+],
+
+// Option 2: dwl/tags (legacy, works with older Waybar versions)
+"modules-left": [
+    "custom/arch",
+    "dwl/tags"
+],
+```
+
+For the window title module, use `dwl/window`:
+```json
+"modules-center": [
+    "dwl/window"
 ],
 ```
 
@@ -118,8 +135,10 @@ Customize these scripts to match your system's specific tools and preferences.
 - Verify config syntax: `waybar -c ~/.config/waybar/config.jsonc --log-level debug`
 
 ### Workspaces not showing
-- MangoWM uses River protocol tags. If not working, install river-protocols package
-- Alternatively, switch to `wlr/workspaces` module
+- MangoWM uses `ext/workspaces` module which requires Waybar 0.14.0+
+- Check Waybar version: `waybar --version`
+- If using older Waybar, switch to `dwl/tags` module (see Customization section)
+- Alternatively, use `wlr/workspaces` for generic wlroots support
 
 ### Icons not displaying
 - Install Nerd Fonts: `sudo pacman -S ttf-jetbrains-mono-nerd ttf-font-awesome`
