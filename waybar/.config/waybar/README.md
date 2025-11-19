@@ -1,207 +1,168 @@
 # Waybar Configuration for MangoWM
 
-A macOS-inspired glassmorphic Waybar configuration designed specifically for MangoWM window manager.
+A clean, GTK3-compatible Waybar configuration for MangoWM window manager with Catppuccin-inspired colors.
 
 ## Features
 
-- **Glassmorphic Design**: Modern, translucent UI with blur effects
-- **Workspace Indicators**: Numbered circles (1-9) with contrasting colors
-- **Interactive Control Panels**: Click-to-open menus for system controls
-- **Smooth Animations**: macOS-style transitions and hover effects
-- **MangoWM Integration**: Native support for MangoWM tags/workspaces
+- **MangoWM Integration**: Uses `ext/workspaces` and `dwl/window` modules
+- **GTK3 Compatible**: Only uses CSS properties supported by GTK3
+- **Clean Design**: Transparent background with rounded corners
+- **Color-Coded Modules**: Easy-to-read status indicators
+- **Interactive Scripts**: Power, bluetooth, network, volume, and brightness controls
 
 ## Module Layout
 
 ### Left Side
-- **Arch Linux Icon**: Application launcher (opens rofi)
-- **Workspace Tags**: 9 circular numbered indicators
+- Arch Linux icon (application launcher)
+- Workspace indicators (clickable numbers)
 
 ### Center
-- **Window Title**: Shows active window name (icon only)
-
-### Center-Right
-- **Clock**: Date and time with calendar popup
+- Window title
 
 ### Right Side
-- **Bluetooth**: Connection status with control menu
-- **Network**: WiFi/Ethernet/Disconnected status with network menu
-- **Volume**: Audio control with slider and device selection
-- **Brightness**: Screen brightness control with presets
-- **Power Menu**: Shutdown/Reboot/Suspend/Logout/Lock options
+- Clock (date + time)
+- Bluetooth status
+- Network status
+- Volume control
+- Brightness control
+- Power menu
 
 ## Installation
 
 ### Dependencies
 
-Required packages:
 ```bash
-# Arch Linux / Manjaro
+# Required packages (Arch Linux)
 sudo pacman -S waybar rofi brightnessctl networkmanager pulseaudio bluez bluez-utils
 
-# IMPORTANT: Waybar 0.14.0+ required for ext/workspaces module support
-# Check version: waybar --version
+# IMPORTANT: Waybar 0.14.0+ required for ext/workspaces support
+waybar --version
 
 # Optional but recommended
 sudo pacman -S pavucontrol blueman nm-connection-editor
-sudo pacman -S ttf-font-awesome ttf-jetbrains-mono-nerd
+sudo pacman -S ttf-jetbrains-mono-nerd ttf-font-awesome-6
 ```
 
 ### Setup
 
-1. Copy configuration to your home directory:
-```bash
-cp -r ~/.config/waybar ~/path/to/dotfiles/waybar/.config/waybar
-```
-
-2. Ensure scripts are executable:
+1. Ensure scripts are executable:
 ```bash
 chmod +x ~/.config/waybar/scripts/*.sh
 ```
 
-3. Add to MangoWM autostart (already configured):
+2. Add to MangoWM autostart (`~/.config/mango/autostart.sh`):
 ```bash
-# In ~/.config/mango/autostart.sh
 waybar -c ~/.config/waybar/config.jsonc -s ~/.config/waybar/style.css &
 ```
 
-4. Restart Waybar:
+3. Restart Waybar:
 ```bash
-pkill waybar && waybar -c ~/.config/waybar/config.jsonc -s ~/.config/waybar/style.css &
+pkill waybar && waybar &
 ```
 
 ## Customization
 
 ### Colors
 
-The color scheme uses MangoWM's cyan focus color (`#42f5dd`). Edit `style.css` to customize:
+The config uses Catppuccin Mocha colors. Edit `style.css`:
 
 ```css
-/* Active workspace color */
-#ext-workspaces button.focused {
-    background: linear-gradient(135deg, #42f5dd 0%, #36c9b5 100%);
+/* Main background */
+window#waybar {
+    background-color: rgba(30, 30, 46, 0.9);  /* Dark with transparency */
 }
 
-/* Main window background */
-window#waybar {
-    background: rgba(20, 20, 30, 0.85);
+/* Active workspace */
+#ext/workspaces button.active {
+    background-color: #42f5dd;  /* MangoWM cyan */
 }
 ```
 
-### Glassmorphic Effects & Blur
+### Compositor Blur
 
-**Note:** Some modern CSS features are not supported by GTK's CSS parser (which Waybar uses):
+For glassmorphic effect, enable blur in MangoWM config (`~/.config/mango/config.conf`):
 
-- ❌ `backdrop-filter: blur()` - Blur effects behind elements
-- ❌ `transform` - Scale, translate, rotate effects
-
-The configuration achieves a glassmorphic look through supported properties:
-
-- ✅ Semi-transparent backgrounds with `rgba()` colors
-- ✅ Layered transparency effects
-- ✅ Subtle borders and shadows
-- ✅ Smooth transitions (color, background, opacity)
-- ✅ Box shadows for depth and hover effects
-
-**To achieve real blur effects**, use a compositor that supports window blur:
-
-```bash
-# For Picom (X11 compositors)
-picom --blur-method dual_kawase --blur-strength 5
-
-# MangoWM may have built-in blur support - check your compositor settings
-# Edit ~/.config/mango/config.conf and enable blur:
+```conf
 blur=1
 blur_layer=1
 blur_params_radius = 5
-blur_params_noise = 0.02
 ```
-
-The transparency will blend with your wallpaper/background, creating a frosted glass effect when combined with compositor blur.
 
 ### Workspace Module
 
-MangoWM uses the `ext/workspaces` module (requires Waybar 0.14.0+) for workspace management. If you're using an older version of Waybar or experience issues, you can alternatively use:
+If using older Waybar (< 0.14.0), switch to legacy `dwl/tags` module:
 
-- `dwl/tags` - Legacy DWL module for tags (built into MangoWM)
-- `wlr/workspaces` - Generic wlroots support (may have limited functionality)
-
-Edit `config.jsonc`:
 ```json
-// Option 1: ext/workspaces (recommended, requires Waybar 0.14.0+)
 "modules-left": [
     "custom/arch",
-    "ext/workspaces"
-],
-
-// Option 2: dwl/tags (legacy, works with older Waybar versions)
-"modules-left": [
-    "custom/arch",
-    "dwl/tags"
-],
-```
-
-For the window title module, use `dwl/window`:
-```json
-"modules-center": [
-    "dwl/window"
+    "dwl/tags"  // Instead of ext/workspaces
 ],
 ```
 
 ### Scripts
 
-All control panel scripts are located in `scripts/` directory:
-
-- `power-menu.sh`: Power management options
-- `bluetooth-menu.sh`: Bluetooth device control
-- `network-menu.sh`: Network connection management
-- `volume-menu.sh`: Audio output and volume control
-- `brightness-menu.sh`: Screen brightness presets
-
-Customize these scripts to match your system's specific tools and preferences.
+Control panel scripts in `scripts/` directory:
+- `power-menu.sh` - Shutdown/reboot/suspend/logout/lock
+- `bluetooth-menu.sh` - Bluetooth device management
+- `network-menu.sh` - Network connection controls
+- `volume-menu.sh` - Audio output and volume control
+- `brightness-menu.sh` - Screen brightness presets
 
 ## Troubleshooting
 
 ### Waybar doesn't start
-- Check Waybar logs: `journalctl --user -u waybar`
-- Verify config syntax: `waybar -c ~/.config/waybar/config.jsonc --log-level debug`
-
-### CSS errors: "backdrop-filter" or "transform" not valid
-- This is expected - GTK (which Waybar uses) doesn't support some modern CSS properties:
-  - `backdrop-filter` (blur effects)
-  - `transform` (scale, translate, rotate)
-- The configuration has been updated to remove these unsupported properties
-- Visual effects still work via supported CSS (rgba colors, transitions, box-shadow)
-- For true blur effects, enable compositor blur in MangoWM config (see Customization section)
-
-### Workspaces not showing
-- MangoWM uses `ext/workspaces` module which requires Waybar 0.14.0+
-- Check Waybar version: `waybar --version`
-- If using older Waybar, switch to `dwl/tags` module (see Customization section)
-- Alternatively, use `wlr/workspaces` for generic wlroots support
-
-### Icons not displaying
-- Install Nerd Fonts: `sudo pacman -S ttf-jetbrains-mono-nerd ttf-font-awesome`
-- Verify font configuration in `style.css`
-
-### Scripts not working
-- Ensure scripts have execute permissions: `chmod +x ~/.config/waybar/scripts/*.sh`
-- Check dependencies (rofi, brightnessctl, nmcli, pactl, bluetoothctl)
-
-### Lock screen command
-The power menu uses `hyprlock` or `swaylock`. Adjust in `scripts/power-menu.sh`:
 ```bash
-# For different lock screens:
-swaylock -f          # Swaylock
-hyprlock             # Hyprlock
-gtklock              # GTKLock
+# Check logs
+waybar --log-level debug
+
+# Verify config syntax
+jsonlint config.jsonc
 ```
 
-## Configuration Files
+### Workspaces not showing
+- Requires Waybar 0.14.0+ for `ext/workspaces`
+- Check version: `waybar --version`
+- Fallback: Use `dwl/tags` module (see Customization)
+
+### Icons not displaying
+```bash
+# Install Nerd Fonts
+sudo pacman -S ttf-jetbrains-mono-nerd ttf-font-awesome-6
+
+# Verify font installation
+fc-list | grep -i "jetbrains"
+```
+
+### Scripts not working
+```bash
+# Make executable
+chmod +x ~/.config/waybar/scripts/*.sh
+
+# Check dependencies
+which rofi brightnessctl nmcli pactl bluetoothctl
+```
+
+## GTK CSS Limitations
+
+GTK3's CSS parser has limitations compared to web browsers. This config uses **only supported properties**:
+
+✅ Supported:
+- `color`, `background-color`, `opacity`
+- `font-family`, `font-size`, `font-weight`
+- `padding`, `margin`, `border`, `border-radius`
+- `min-width`, `min-height`, `max-width`, `max-height`
+
+❌ Not supported (removed from this config):
+- `backdrop-filter` - Use compositor blur instead
+- `transform` - Scale/translate/rotate effects
+- `@keyframes` / `animation` - Can cause parsing errors
+
+## Files
 
 ```
 waybar/
-├── config.jsonc          # Main configuration
-├── style.css            # Glassmorphic styling
+├── config.jsonc       # Main configuration
+├── style.css          # GTK3-compatible styling
 ├── scripts/
 │   ├── power-menu.sh
 │   ├── bluetooth-menu.sh
@@ -211,22 +172,12 @@ waybar/
 └── README.md
 ```
 
-## Keyboard Shortcuts
-
-Configure in MangoWM config (`~/.config/mango/config.conf`):
-
-```conf
-# Example: Toggle Waybar visibility
-bind=SUPER,b,exec,pkill -SIGUSR1 waybar
-```
-
 ## Credits
 
-Design inspired by:
-- macOS Big Sur menu bar
-- [mrinmoyin's dotfiles](https://gitlab.com/mrinmoyin/dotfiles)
-- [woioeow's Hyprland dotfiles](https://github.com/woioeow/hyprland-dotfiles)
+- Colors inspired by [Catppuccin](https://github.com/catppuccin/catppuccin)
+- MangoWM focus color (#42f5dd)
+- GTK3-compatible CSS design
 
 ## License
 
-MIT License - Feel free to customize and share!
+MIT

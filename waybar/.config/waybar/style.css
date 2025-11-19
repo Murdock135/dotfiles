@@ -1,344 +1,120 @@
-/* ========================================
-   Waybar macOS-inspired Glassmorphic Theme
-   for MangoWM
-   ======================================== */
+/* Waybar GTK3-Compatible Style for MangoWM */
 
-/* Font Configuration */
 * {
-    font-family: "SF Pro Display", "JetBrainsMono Nerd Font", "Font Awesome 6 Free", sans-serif;
-    font-size: 14px;
-    font-weight: 500;
+    font-family: "JetBrainsMono Nerd Font", "Font Awesome 6 Free", sans-serif;
+    font-size: 13px;
+    font-weight: 600;
     min-height: 0;
 }
 
-/* Main Window - Glassmorphic Background */
 window#waybar {
-    background: rgba(20, 20, 30, 0.85);
-    border-radius: 16px;
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    color: #dcdfe1;
-    transition: all 0.3s cubic-bezier(0.4, 0.0, 0.2, 1);
-    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+    background-color: rgba(30, 30, 46, 0.9);
+    color: #cdd6f4;
+    border-radius: 10px;
 }
 
-/* Smooth transitions for all modules */
-#ext-workspaces,
-#clock,
-#battery,
-#cpu,
-#memory,
-#network,
-#pulseaudio,
-#backlight,
-#bluetooth,
-#custom-arch,
-#custom-power,
-#dwl-window {
-    padding: 6px 14px;
-    margin: 4px 3px;
-    background: rgba(255, 255, 255, 0.05);
-    border-radius: 12px;
-    border: 1px solid rgba(255, 255, 255, 0.08);
-    transition: all 0.3s cubic-bezier(0.4, 0.0, 0.2, 1);
-}
-
-/* Hover Effects - macOS Style */
-#clock:hover,
-#battery:hover,
-#cpu:hover,
-#memory:hover,
-#network:hover,
-#pulseaudio:hover,
-#backlight:hover,
-#bluetooth:hover,
-#custom-power:hover {
-    background: rgba(255, 255, 255, 0.12);
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-}
-
-/* ========================================
-   Left Side - Arch Icon
-   ======================================== */
+/* Left Side - Arch Icon */
 #custom-arch {
-    font-size: 18px;
-    color: #61afef;
-    background: linear-gradient(135deg, rgba(97, 175, 239, 0.15) 0%, rgba(97, 175, 239, 0.05) 100%);
-    border: 1px solid rgba(97, 175, 239, 0.3);
-    padding: 6px 16px;
-    margin-left: 8px;
+    font-size: 16px;
+    color: #89b4fa;
+    background-color: rgba(137, 180, 250, 0.1);
+    padding: 0 12px;
+    margin: 4px 0 4px 6px;
+    border-radius: 8px;
 }
 
-#custom-arch:hover {
-    background: linear-gradient(135deg, rgba(97, 175, 239, 0.25) 0%, rgba(97, 175, 239, 0.15) 100%);
-    border: 1px solid rgba(97, 175, 239, 0.5);
-    box-shadow: 0 4px 16px rgba(97, 175, 239, 0.3);
-}
-
-/* ========================================
-   Workspace/Tags - Numbered Circles
-   ======================================== */
+/* Workspaces */
 #ext-workspaces button {
-    padding: 0;
+    padding: 0 8px;
     margin: 4px 2px;
-    min-width: 32px;
-    min-height: 32px;
-    background: rgba(255, 255, 255, 0.05);
-    color: #dcdfe1;
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    border-radius: 50%;
-    transition: all 0.3s cubic-bezier(0.4, 0.0, 0.2, 1);
-    font-weight: 600;
-    font-size: 13px;
-}
-
-#ext-workspaces button:hover {
-    background: rgba(255, 255, 255, 0.15);
-    border: 1px solid rgba(255, 255, 255, 0.25);
-    box-shadow: 0 4px 12px rgba(66, 245, 221, 0.2);
-}
-
-/* Active/Focused Workspace - Contrasting Background */
-#ext-workspaces button.focused,
-#ext-workspaces button.active {
-    background: linear-gradient(135deg, #42f5dd 0%, #36c9b5 100%);
-    color: #0f0f1a;
-    border: 1px solid #42f5dd;
-    box-shadow: 0 4px 16px rgba(66, 245, 221, 0.4);
-    font-weight: 700;
-}
-
-/* Urgent Workspace */
-#ext-workspaces button.urgent {
-    background: linear-gradient(135deg, #ec5f67 0%, #d44a51 100%);
-    color: #ffffff;
-    border: 1px solid #ec5f67;
-    animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
-}
-
-@keyframes pulse {
-    0%, 100% {
-        opacity: 1;
-        box-shadow: 0 4px 16px rgba(236, 95, 103, 0.6);
-    }
-    50% {
-        opacity: 0.85;
-        box-shadow: 0 4px 24px rgba(236, 95, 103, 0.8);
-    }
-}
-
-/* ========================================
-   Center - Window Title
-   ======================================== */
-#dwl-window {
-    font-weight: 500;
-    color: #dcdfe1;
-    background: rgba(255, 255, 255, 0.03);
-    border: 1px solid rgba(255, 255, 255, 0.06);
-    padding: 6px 20px;
-    max-width: 500px;
-}
-
-#dwl-window.empty {
-    background: transparent;
+    min-width: 24px;
+    color: #cdd6f4;
+    background-color: rgba(205, 214, 244, 0.1);
+    border-radius: 6px;
     border: none;
 }
 
-/* ========================================
-   Clock Module
-   ======================================== */
+#ext-workspaces button.active {
+    background-color: #42f5dd;
+    color: #1e1e2e;
+}
+
+#ext-workspaces button.urgent {
+    background-color: #f38ba8;
+    color: #1e1e2e;
+}
+
+/* Window Title */
+#dwl-window {
+    color: #cdd6f4;
+    background-color: transparent;
+    padding: 0 12px;
+}
+
+/* Right Side Modules */
+#clock,
+#bluetooth,
+#network,
+#pulseaudio,
+#backlight,
+#custom-power {
+    padding: 0 10px;
+    margin: 4px 2px;
+    background-color: rgba(205, 214, 244, 0.1);
+    border-radius: 8px;
+}
+
 #clock {
-    font-weight: 600;
-    color: #ffffff;
-    background: linear-gradient(135deg, rgba(97, 175, 239, 0.2) 0%, rgba(97, 175, 239, 0.1) 100%);
-    border: 1px solid rgba(97, 175, 239, 0.3);
-    padding: 6px 18px;
+    color: #89b4fa;
+    font-weight: 700;
 }
 
-#clock:hover {
-    background: linear-gradient(135deg, rgba(97, 175, 239, 0.3) 0%, rgba(97, 175, 239, 0.2) 100%);
-    box-shadow: 0 4px 16px rgba(97, 175, 239, 0.3);
-}
-
-/* ========================================
-   Bluetooth Module
-   ======================================== */
 #bluetooth {
-    color: #61afef;
+    color: #89b4fa;
 }
 
 #bluetooth.disabled {
-    color: #5c6370;
-    opacity: 0.5;
+    color: #6c7086;
 }
 
 #bluetooth.connected {
     color: #42f5dd;
-    background: rgba(66, 245, 221, 0.1);
-    border: 1px solid rgba(66, 245, 221, 0.3);
 }
 
-/* ========================================
-   Network Module
-   ======================================== */
 #network {
-    color: #98c379;
+    color: #a6e3a1;
 }
 
 #network.disconnected {
-    color: #ec5f67;
-    background: rgba(236, 95, 103, 0.1);
-    border: 1px solid rgba(236, 95, 103, 0.3);
+    color: #f38ba8;
 }
 
-#network.ethernet {
-    color: #42f5dd;
-}
-
-#network.wifi {
-    color: #98c379;
-}
-
-/* ========================================
-   Volume Module
-   ======================================== */
 #pulseaudio {
-    color: #fac863;
+    color: #f9e2af;
 }
 
 #pulseaudio.muted {
-    color: #ec5f67;
-    background: rgba(236, 95, 103, 0.1);
-    border: 1px solid rgba(236, 95, 103, 0.3);
+    color: #f38ba8;
 }
 
-#pulseaudio.bluetooth {
-    color: #61afef;
-}
-
-/* ========================================
-   Brightness Module
-   ======================================== */
 #backlight {
-    color: #e5c07b;
+    color: #fab387;
 }
 
-/* ========================================
-   Power Menu
-   ======================================== */
 #custom-power {
-    font-size: 16px;
-    color: #ec5f67;
-    background: linear-gradient(135deg, rgba(236, 95, 103, 0.15) 0%, rgba(236, 95, 103, 0.05) 100%);
-    border: 1px solid rgba(236, 95, 103, 0.3);
-    padding: 6px 16px;
-    margin-right: 8px;
+    color: #f38ba8;
+    margin-right: 6px;
+    font-size: 14px;
 }
 
-#custom-power:hover {
-    background: linear-gradient(135deg, rgba(236, 95, 103, 0.25) 0%, rgba(236, 95, 103, 0.15) 100%);
-    border: 1px solid rgba(236, 95, 103, 0.5);
-    box-shadow: 0 4px 16px rgba(236, 95, 103, 0.4);
-}
-
-/* ========================================
-   Tooltip Styling
-   ======================================== */
+/* Tooltips */
 tooltip {
-    background: rgba(20, 20, 30, 0.95);
-    border-radius: 12px;
-    border: 1px solid rgba(255, 255, 255, 0.15);
-    padding: 12px 16px;
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+    background-color: rgba(30, 30, 46, 0.95);
+    border-radius: 8px;
+    border: 1px solid rgba(205, 214, 244, 0.2);
+    padding: 8px 12px;
 }
 
 tooltip label {
-    color: #dcdfe1;
-    font-weight: 500;
-}
-
-/* ========================================
-   Tray (if needed)
-   ======================================== */
-#tray {
-    background: rgba(255, 255, 255, 0.05);
-    padding: 6px 12px;
-}
-
-#tray > .passive {
-    -gtk-icon-effect: dim;
-}
-
-#tray > .needs-attention {
-    -gtk-icon-effect: highlight;
-    background-color: rgba(236, 95, 103, 0.2);
-    border: 1px solid rgba(236, 95, 103, 0.5);
-}
-
-/* ========================================
-   Additional State Styling
-   ======================================== */
-
-/* Battery States */
-#battery {
-    color: #98c379;
-}
-
-#battery.charging {
-    color: #42f5dd;
-    background: rgba(66, 245, 221, 0.1);
-    border: 1px solid rgba(66, 245, 221, 0.3);
-}
-
-#battery.warning:not(.charging) {
-    color: #fac863;
-    background: rgba(250, 200, 99, 0.1);
-    border: 1px solid rgba(250, 200, 99, 0.3);
-}
-
-#battery.critical:not(.charging) {
-    color: #ec5f67;
-    background: rgba(236, 95, 103, 0.15);
-    border: 1px solid rgba(236, 95, 103, 0.4);
-    animation: blink 1s cubic-bezier(0.4, 0, 0.6, 1) infinite;
-}
-
-@keyframes blink {
-    0%, 100% {
-        opacity: 1;
-    }
-    50% {
-        opacity: 0.6;
-    }
-}
-
-/* CPU/Memory States */
-#cpu,
-#memory {
-    color: #c678dd;
-}
-
-#cpu.warning,
-#memory.warning {
-    color: #fac863;
-    background: rgba(250, 200, 99, 0.1);
-    border: 1px solid rgba(250, 200, 99, 0.3);
-}
-
-#cpu.critical,
-#memory.critical {
-    color: #ec5f67;
-    background: rgba(236, 95, 103, 0.15);
-    border: 1px solid rgba(236, 95, 103, 0.4);
-}
-
-/* Temperature States */
-#temperature {
-    color: #61afef;
-}
-
-#temperature.critical {
-    color: #ec5f67;
-    background: rgba(236, 95, 103, 0.15);
-    border: 1px solid rgba(236, 95, 103, 0.4);
+    color: #cdd6f4;
 }
