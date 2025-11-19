@@ -87,6 +87,31 @@ window#waybar {
 }
 ```
 
+### Glassmorphic Effects & Blur
+
+**Note:** True glassmorphic blur effects (using `backdrop-filter: blur()`) are not supported by GTK's CSS parser, which Waybar uses. The configuration achieves a glassmorphic look through:
+
+- Semi-transparent backgrounds with `rgba()` colors
+- Layered transparency effects
+- Subtle borders and shadows
+- Smooth transitions and animations
+
+**To achieve real blur effects**, use a compositor that supports window blur:
+
+```bash
+# For Picom (X11 compositors)
+picom --blur-method dual_kawase --blur-strength 5
+
+# MangoWM may have built-in blur support - check your compositor settings
+# Edit ~/.config/mango/config.conf and enable blur:
+blur=1
+blur_layer=1
+blur_params_radius = 5
+blur_params_noise = 0.02
+```
+
+The transparency will blend with your wallpaper/background, creating a frosted glass effect when combined with compositor blur.
+
 ### Workspace Module
 
 MangoWM uses the `ext/workspaces` module (requires Waybar 0.14.0+) for workspace management. If you're using an older version of Waybar or experience issues, you can alternatively use:
@@ -133,6 +158,12 @@ Customize these scripts to match your system's specific tools and preferences.
 ### Waybar doesn't start
 - Check Waybar logs: `journalctl --user -u waybar`
 - Verify config syntax: `waybar -c ~/.config/waybar/config.jsonc --log-level debug`
+
+### CSS error: "backdrop-filter is not a valid property"
+- This is expected - GTK (which Waybar uses) doesn't support CSS `backdrop-filter`
+- The configuration has been updated to remove these unsupported properties
+- Transparency effects still work via `rgba()` colors
+- For true blur effects, enable compositor blur in MangoWM config (see Customization section)
 
 ### Workspaces not showing
 - MangoWM uses `ext/workspaces` module which requires Waybar 0.14.0+

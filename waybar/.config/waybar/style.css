@@ -14,8 +14,6 @@
 /* Main Window - Glassmorphic Background */
 window#waybar {
     background: rgba(20, 20, 30, 0.85);
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
     border-radius: 16px;
     border: 1px solid rgba(255, 255, 255, 0.1);
     color: #dcdfe1;
@@ -251,8 +249,6 @@ window#waybar {
    ======================================== */
 tooltip {
     background: rgba(20, 20, 30, 0.95);
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
     border-radius: 12px;
     border: 1px solid rgba(255, 255, 255, 0.15);
     padding: 12px 16px;
