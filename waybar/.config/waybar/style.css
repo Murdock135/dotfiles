@@ -55,7 +55,6 @@ window#waybar {
     background: rgba(255, 255, 255, 0.12);
     border: 1px solid rgba(255, 255, 255, 0.2);
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-    transform: translateY(-1px);
 }
 
 /* ========================================
@@ -97,7 +96,6 @@ window#waybar {
     background: rgba(255, 255, 255, 0.15);
     border: 1px solid rgba(255, 255, 255, 0.25);
     box-shadow: 0 4px 12px rgba(66, 245, 221, 0.2);
-    transform: scale(1.1);
 }
 
 /* Active/Focused Workspace - Contrasting Background */
@@ -241,7 +239,6 @@ window#waybar {
     background: linear-gradient(135deg, rgba(236, 95, 103, 0.25) 0%, rgba(236, 95, 103, 0.15) 100%);
     border: 1px solid rgba(236, 95, 103, 0.5);
     box-shadow: 0 4px 16px rgba(236, 95, 103, 0.4);
-    transform: scale(1.05);
 }
 
 /* ========================================
