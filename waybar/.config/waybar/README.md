@@ -89,12 +89,18 @@ window#waybar {
 
 ### Glassmorphic Effects & Blur
 
-**Note:** True glassmorphic blur effects (using `backdrop-filter: blur()`) are not supported by GTK's CSS parser, which Waybar uses. The configuration achieves a glassmorphic look through:
+**Note:** Some modern CSS features are not supported by GTK's CSS parser (which Waybar uses):
 
-- Semi-transparent backgrounds with `rgba()` colors
-- Layered transparency effects
-- Subtle borders and shadows
-- Smooth transitions and animations
+- ❌ `backdrop-filter: blur()` - Blur effects behind elements
+- ❌ `transform` - Scale, translate, rotate effects
+
+The configuration achieves a glassmorphic look through supported properties:
+
+- ✅ Semi-transparent backgrounds with `rgba()` colors
+- ✅ Layered transparency effects
+- ✅ Subtle borders and shadows
+- ✅ Smooth transitions (color, background, opacity)
+- ✅ Box shadows for depth and hover effects
 
 **To achieve real blur effects**, use a compositor that supports window blur:
 
@@ -159,10 +165,12 @@ Customize these scripts to match your system's specific tools and preferences.
 - Check Waybar logs: `journalctl --user -u waybar`
 - Verify config syntax: `waybar -c ~/.config/waybar/config.jsonc --log-level debug`
 
-### CSS error: "backdrop-filter is not a valid property"
-- This is expected - GTK (which Waybar uses) doesn't support CSS `backdrop-filter`
+### CSS errors: "backdrop-filter" or "transform" not valid
+- This is expected - GTK (which Waybar uses) doesn't support some modern CSS properties:
+  - `backdrop-filter` (blur effects)
+  - `transform` (scale, translate, rotate)
 - The configuration has been updated to remove these unsupported properties
-- Transparency effects still work via `rgba()` colors
+- Visual effects still work via supported CSS (rgba colors, transitions, box-shadow)
 - For true blur effects, enable compositor blur in MangoWM config (see Customization section)
 
 ### Workspaces not showing
