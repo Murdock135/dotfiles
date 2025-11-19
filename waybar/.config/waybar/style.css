@@ -1,120 +1,145 @@
-/* Waybar GTK3-Compatible Style for MangoWM */
+/* Waybar Style for MangoWM - Adapted from mrinmoyin's dotfiles */
+/* GTK3-Compatible */
+
+@define-color rosewater #f5e0dc;
+@define-color flamingo #f2cdcd;
+@define-color pink #f5c2e7;
+@define-color mauve #cba6f7;
+@define-color red #f38ba8;
+@define-color maroon #eba0ac;
+@define-color peach #fab387;
+@define-color yellow #f9e2af;
+@define-color green #a6e3a1;
+@define-color teal #94e2d5;
+@define-color sky #89dceb;
+@define-color sapphire #74c7ec;
+@define-color blue #89b4fa;
+@define-color lavender #b4befe;
+
+@define-color base alpha(#000000, 0.1);
+@define-color surface alpha(#000000, 0.5);
+@define-color text #cdd6f4;
+@define-color hoverBg alpha(@mauve, 1);
+@define-color hoverFg #000000;
+@define-color activeBg alpha(@mauve, 1);
+@define-color activeFg #000000;
+@define-color shadow alpha(@lavender, 0.25);
 
 * {
-    font-family: "JetBrainsMono Nerd Font", "Font Awesome 6 Free", sans-serif;
-    font-size: 13px;
-    font-weight: 600;
-    min-height: 0;
+  all: unset;
+  font-size: 1rem;
+  font-weight: 900;
+  font-family:
+    JetBrainsMonoNerdFont,
+    Font Awesome,
+    Roboto,
+    Helvetica,
+    Arial,
+    sans-serif;
+  background-clip: border-box;
 }
 
-window#waybar {
-    background-color: rgba(30, 30, 46, 0.9);
-    color: #cdd6f4;
-    border-radius: 10px;
+button {
+  min-width: 32px;
+  min-height: 32px;
+  border-radius: 999px;
+  color: @text;
+  box-shadow: 0px 0px 8px 4px @shadow inset;
+  transition:
+    all 50ms cubic-bezier(0.55, 0, 0.28, 1.682),
+    box-shadow 50ms ease-in-out,
+    background-color 200ms ease-in-out;
 }
 
-/* Left Side - Arch Icon */
-#custom-arch {
-    font-size: 16px;
-    color: #89b4fa;
-    background-color: rgba(137, 180, 250, 0.1);
-    padding: 0 12px;
-    margin: 4px 0 4px 6px;
-    border-radius: 8px;
+button:hover {
+  color: @hoverFg;
+  background: @hoverBg;
 }
 
-/* Workspaces */
-#ext-workspaces button {
-    padding: 0 8px;
-    margin: 4px 2px;
-    min-width: 24px;
-    color: #cdd6f4;
-    background-color: rgba(205, 214, 244, 0.1);
-    border-radius: 6px;
-    border: none;
+button.active {
+  color: @activeFg;
+  background: @activeBg;
 }
 
-#ext-workspaces button.active {
-    background-color: #42f5dd;
-    color: #1e1e2e;
+tooltip {
+  opacity: 1;
 }
 
-#ext-workspaces button.urgent {
-    background-color: #f38ba8;
-    color: #1e1e2e;
+window#waybar.empty #window {
+  background-color: transparent;
 }
 
-/* Window Title */
-#dwl-window {
-    color: #cdd6f4;
-    background-color: transparent;
-    padding: 0 12px;
+#window {
+  margin-right: 8px;
 }
 
-/* Right Side Modules */
-#clock,
-#bluetooth,
+#ext-workspaces,
+#custom-arch,
 #network,
+#bluetooth,
 #pulseaudio,
 #backlight,
+#battery,
+#clock,
 #custom-power {
-    padding: 0 10px;
-    margin: 4px 2px;
-    background-color: rgba(205, 214, 244, 0.1);
-    border-radius: 8px;
+  background-color: @surface;
+  border-radius: 999px;
+  box-shadow: 0px 0px 8px 4px @shadow inset;
 }
 
+#network,
+#bluetooth,
+#pulseaudio,
+#backlight,
+#battery,
 #clock {
-    color: #89b4fa;
-    font-weight: 700;
+  padding: 0 8px;
 }
 
-#bluetooth {
-    color: #89b4fa;
+#custom-arch,
+#custom-power {
+  font-size: 24px;
+  min-width: 32px;
+  min-height: 32px;
+  padding-right: 4px;
+  border-radius: 999px;
 }
 
-#bluetooth.disabled {
-    color: #6c7086;
+#ext-workspaces button {
+  margin-right: 2px;
+}
+#ext-workspaces button:last-child {
+  margin-right: 0;
 }
 
-#bluetooth.connected {
-    color: #42f5dd;
+#taskbar {
+  font-weight: normal;
+  font-style: normal;
 }
 
-#network {
-    color: #a6e3a1;
+/* Battery critical state - static style instead of animation */
+#battery.critical:not(.charging) {
+  background-color: @activeBg;
+  color: @activeFg;
 }
 
-#network.disconnected {
-    color: #f38ba8;
+#tray > .passive {
+  -gtk-icon-effect: dim;
 }
 
-#pulseaudio {
-    color: #f9e2af;
+#tray > .needs-attention {
+  -gtk-icon-effect: highlight;
+  background-color: @activeBg;
 }
 
-#pulseaudio.muted {
-    color: #f38ba8;
+label:focus {
+  background-color: @activeBg;
 }
 
 #backlight {
-    color: #fab387;
+  background-color: @activeBg;
 }
 
-#custom-power {
-    color: #f38ba8;
-    margin-right: 6px;
-    font-size: 14px;
-}
-
-/* Tooltips */
-tooltip {
-    background-color: rgba(30, 30, 46, 0.95);
-    border-radius: 8px;
-    border: 1px solid rgba(205, 214, 244, 0.2);
-    padding: 8px 12px;
-}
-
-tooltip label {
-    color: #cdd6f4;
+#temperature.critical {
+  color: red;
 }

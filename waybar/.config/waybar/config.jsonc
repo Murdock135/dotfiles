@@ -1,103 +1,125 @@
 // Waybar Configuration for MangoWM
+// Design adapted from mrinmoyin's dotfiles
 {
-    "layer": "top",
-    "position": "top",
-    "height": 34,
-    "spacing": 6,
-    "margin-top": 6,
-    "margin-left": 10,
-    "margin-right": 10,
+  "layer": "top",
+  "position": "top",
+  "height": 16,
+  "spacing": 8,
+  "margin-top": 8,
+  "margin-left": 8,
+  "margin-right": 8,
+  "mode": "dock",
 
-    "modules-left": [
-        "custom/arch",
-        "ext/workspaces"
-    ],
-    "modules-center": [
-        "dwl/window"
-    ],
-    "modules-right": [
-        "clock",
-        "bluetooth",
-        "network",
-        "pulseaudio",
-        "backlight",
-        "custom/power"
-    ],
+  "modules-left": [
+    "custom/arch",
+    "ext/workspaces",
+    "tray",
+    "dwl/window"
+  ],
+  "modules-center": [],
+  "modules-right": [
+    "network",
+    "bluetooth",
+    "pulseaudio",
+    "backlight",
+    "battery",
+    "clock",
+    "custom/power"
+  ],
 
-    "custom/arch": {
-        "format": " ",
-        "tooltip": false,
-        "on-click": "rofi -show drun"
+  "custom/arch": {
+    "format": "",
+    "tooltip": false,
+    "on-click": "rofi -show drun"
+  },
+
+  "ext/workspaces": {
+    "format": "{id}",
+    "on-click": "activate",
+    "sort-by-id": true
+  },
+
+  "dwl/window": {
+    "format": "{title}",
+    "max-length": 50,
+    "rewrite": {
+      "(.*) — Mozilla Firefox": "🌎 $1",
+      "(.*) - fish": "> [$1]"
     },
+    "separate-outputs": false
+  },
 
-    "ext/workspaces": {
-        "format": "{id}",
-        "on-click": "activate",
-        "sort-by-id": true,
-        "all-outputs": false
-    },
+  "tray": {
+    "icon-size": 18,
+    "spacing": 8
+  },
 
-    "dwl/window": {
-        "format": "{title}",
-        "max-length": 50
-    },
-
-    "clock": {
-        "interval": 60,
-        "format": "{:%a %d %b  %H:%M}",
-        "format-alt": "{:%A, %B %d, %Y  %H:%M:%S}",
-        "tooltip-format": "<tt><small>{calendar}</small></tt>",
-        "calendar": {
-            "mode": "month",
-            "format": {
-                "today": "<span color='#42f5dd'><b><u>{}</u></b></span>"
-            }
-        }
-    },
-
-    "bluetooth": {
-        "format": "",
-        "format-disabled": "󰂲",
-        "format-connected": " {num_connections}",
-        "tooltip-format": "{controller_alias}\t{controller_address}",
-        "tooltip-format-connected": "{controller_alias}\t{controller_address}\n\n{device_enumerate}",
-        "tooltip-format-enumerate-connected": "{device_alias}\t{device_address}",
-        "on-click": "~/.config/waybar/scripts/bluetooth-menu.sh"
-    },
-
-    "network": {
-        "interval": 5,
-        "format-wifi": " ",
-        "format-ethernet": "󰈀",
-        "format-disconnected": "󰖪",
-        "tooltip-format-wifi": "{essid} ({signalStrength}%)\n{ipaddr}/{cidr}",
-        "tooltip-format-ethernet": "{ifname}\n{ipaddr}/{cidr}",
-        "tooltip-format-disconnected": "Disconnected",
-        "on-click": "~/.config/waybar/scripts/network-menu.sh"
-    },
-
-    "pulseaudio": {
-        "format": "{icon} {volume}%",
-        "format-muted": "󰖁",
-        "format-icons": {
-            "default": ["", "", ""]
-        },
-        "scroll-step": 5,
-        "on-click": "pavucontrol",
-        "on-click-right": "~/.config/waybar/scripts/volume-menu.sh"
-    },
-
-    "backlight": {
-        "format": "{icon} {percent}%",
-        "format-icons": ["", "", "", "", ""],
-        "on-scroll-up": "brightnessctl set 5%+",
-        "on-scroll-down": "brightnessctl set 5%-",
-        "on-click": "~/.config/waybar/scripts/brightness-menu.sh"
-    },
-
-    "custom/power": {
-        "format": "⏻",
-        "tooltip": false,
-        "on-click": "~/.config/waybar/scripts/power-menu.sh"
+  "clock": {
+    "interval": 60,
+    "format": "{:%a %d %b  %H:%M}",
+    "format-alt": "{:%Y-%m-%d  %H:%M:%S}",
+    "tooltip-format": "<tt><small>{calendar}</small></tt>",
+    "calendar": {
+      "mode": "month",
+      "format": {
+        "today": "<span color='#b4befe'><b><u>{}</u></b></span>"
+      }
     }
+  },
+
+  "battery": {
+    "states": {
+      "warning": 30,
+      "critical": 15
+    },
+    "format": "{icon} {capacity}%",
+    "format-charging": " {capacity}%",
+    "format-plugged": " {capacity}%",
+    "format-icons": ["", "", "", "", ""]
+  },
+
+  "network": {
+    "format-wifi": " ",
+    "format-ethernet": "󰈀",
+    "format-disconnected": "󰖪",
+    "tooltip-format-wifi": "{essid} ({signalStrength}%)\n{ipaddr}/{cidr}",
+    "tooltip-format-ethernet": "{ifname}\n{ipaddr}/{cidr}",
+    "tooltip-format-disconnected": "Disconnected",
+    "on-click": "~/.config/waybar/scripts/network-menu.sh"
+  },
+
+  "bluetooth": {
+    "format": "",
+    "format-disabled": "󰂲",
+    "format-connected": " {num_connections}",
+    "tooltip-format": "{controller_alias}\t{controller_address}",
+    "tooltip-format-connected": "{controller_alias}\t{controller_address}\n\n{device_enumerate}",
+    "tooltip-format-enumerate-connected": "{device_alias}\t{device_address}",
+    "on-click": "~/.config/waybar/scripts/bluetooth-menu.sh"
+  },
+
+  "pulseaudio": {
+    "format": "{icon} {volume}%",
+    "format-muted": "󰖁",
+    "format-icons": {
+      "default": ["", "", ""]
+    },
+    "scroll-step": 5,
+    "on-click": "pavucontrol",
+    "on-click-right": "~/.config/waybar/scripts/volume-menu.sh"
+  },
+
+  "backlight": {
+    "format": "{icon} {percent}%",
+    "format-icons": ["", "", "", "", ""],
+    "on-scroll-up": "brightnessctl set 5%+",
+    "on-scroll-down": "brightnessctl set 5%-",
+    "on-click": "~/.config/waybar/scripts/brightness-menu.sh"
+  },
+
+  "custom/power": {
+    "format": "⏻",
+    "tooltip": false,
+    "on-click": "~/.config/waybar/scripts/power-menu.sh"
+  }
 }
