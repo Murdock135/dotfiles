@@ -1,208 +1,76 @@
-// Waybar Configuration for MangoWM
-// Design adapted from mrinmoyin's dotfiles
 {
-  "layer": "top",
-  "position": "top",
-  "height": 16,
-  "spacing": 8,
-  "margin-top": 8,
-  "margin-left": 8,
-  "margin-right": 8,
-  "mode": "dock",
-
   "modules-left": [
-    "custom/arch",
-    "group/quicklinks",
     "ext/workspaces",
-    "tray",
-    "dwl/window"
+    "custom/sep",
+    "dwl/window#layout",
+    "custom/sep",
+    "dwl/window#title"
   ],
-  "modules-center": [],
   "modules-right": [
-    "network",
-    "bluetooth",
-    "pulseaudio",
-    "backlight",
+    "custom/sep",
     "battery",
+    "custom/sep",
+    "network",
+    "custom/sep",
+    "cpu",
+    "custom/sep",
+    "memory",
+    "custom/sep",
+    "disk",
+    "custom/sep",
     "clock",
-    "custom/notification",
-    "custom/power"
+    "custom/sep",
+    "tray"
   ],
 
-  // Arch icon - shows fastfetch on click
-  "custom/arch": {
-    "format": "󰣇",
-    "tooltip-format": "Show system info",
-    "on-click": "alacritty -e fastfetch",
-    "tooltip": true
-  },
-
-  // Pinned apps quicklinks
-  "custom/quicklink1": {
-    "format": "󰈹",
-    "on-click": "firefox",
-    "tooltip-format": "Firefox"
-  },
-  "custom/quicklink2": {
-    "format": "🐟",
-    "on-click": "alacritty",
-    "tooltip-format": "Alacritty"
-  },
-  "custom/quicklink3": {
-    "format": "󰉋",
-    "on-click": "dolphin",
-    "tooltip-format": "Dolphin"
-  },
-  "custom/quicklink4": {
-    "format": "",
-    "on-click": "rofi -show drun",
-    "tooltip-format": "Rofi"
-  },
-  "custom/quicklink5": {
-    "format": "󱓷",
-    "on-click": "obsidian",
-    "tooltip-format": "Obsidian"
-  },
-
-  "group/quicklinks": {
-    "orientation": "horizontal",
-    "modules": [
-      "custom/quicklink1",
-      "custom/quicklink2",
-      "custom/quicklink3",
-      "custom/quicklink4",
-      "custom/quicklink5"
-    ]
-  },
-
-  // Workspaces
-  "ext/workspaces": {
-    "format": "{id}",
-    "on-click": "activate",
-    "sort-by-id": true
-  },
-
-  // Window title
-  "dwl/window": {
-    "format": "{title}",
-    "max-length": 50,
-    "rewrite": {
-      "(.*) — Mozilla Firefox": "🌎 $1",
-      "(.*) - fish": "> [$1]",
-      "(.*) - Obsidian": "󱓷 $1"
-    },
-    "separate-outputs": false
-  },
-
-  // System tray
-  "tray": {
-    "icon-size": 18,
-    "spacing": 8
-  },
-
-  // Clock
   "clock": {
-    "interval": 60,
-    "format": "󰥔 {:%H:%M}",
-    "format-alt": "󰥔 {:%H:%M}   {:%d-%m-%Y}",
-    "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
-    "calendar": {
-      "mode": "month",
-      "format": {
-        "today": "<span color='#b4befe'><b><u>{}</u></b></span>"
-      }
-    }
+    "format-alt": "{:%Y-%m-%d}"
   },
-
-  // Battery
+  "cpu": {
+    "format": "CPU: {usage}%",
+    "tooltip": false
+  },
+  "memory": {
+    "format": "Mem: {used}GiB"
+  },
+  "disk": {
+    "interval": 60,
+    "path": "/",
+    "format": "Disk: {free}"
+  },
   "battery": {
     "states": {
+      "good": 95,
       "warning": 30,
       "critical": 15
     },
-    "format": "{icon} {capacity}%",
-    "format-charging": " {capacity}%",
-    "format-plugged": " {capacity}%",
-    "format-icons": ["", "", "", "", ""]
+    "format": "Bat: {capacity}% {icon} {time}",
+    "format-plugged": "{capacity}% ",
+    "format-alt": "Bat {capacity}%",
+    "format-time": "{H}:{M}",
+    "format-icons": ["", "", "", "", ""]
   },
-
-  // Network with WiFi signal strength and speeds
   "network": {
-    "format": "{ifname}",
-    "format-wifi": "{icon} {signalStrength}%  {bandwidthDownBytes}  {bandwidthUpBytes}",
-    "format-ethernet": "󰈀 {bandwidthDownBytes}  {bandwidthUpBytes}",
-    "format-disconnected": "󰖪",
-    "format-icons": ["󰤯", "󰤟", "󰤢", "󰤥", "󰤨"],
-    "tooltip-format-wifi": "{essid} ({signalStrength}%)\n{ipaddr}/{cidr}\nDown: {bandwidthDownBytes}\nUp: {bandwidthUpBytes}",
-    "tooltip-format-ethernet": "{ifname}\n{ipaddr}/{cidr}\nDown: {bandwidthDownBytes}\nUp: {bandwidthUpBytes}",
-    "tooltip-format-disconnected": "Disconnected",
-    "interval": 1,
-    "max-length": 50,
-    "on-click": "nm-connection-editor"
+    "format": "Online",
+    "format-disconnected": "Disconnected ⚠"
   },
-
-  // Bluetooth
-  "bluetooth": {
-    "format": " {status}",
-    "format-disabled": "󰂲",
-    "format-off": "󰂲",
-    "format-on": "",
-    "format-connected": " {num_connections}",
-    "tooltip-format": "{controller_alias}\t{controller_address}\n{status}",
-    "tooltip-format-connected": "{controller_alias}\t{controller_address}\n\n{num_connections} connected\n\n{device_enumerate}",
-    "tooltip-format-enumerate-connected": "{device_alias}\t{device_address}",
-    "on-click": "blueman-manager"
-  },
-
-  // Audio with volume slider (SwayOSD)
-  "pulseaudio": {
-    "format": "{icon} {volume}%",
-    "format-muted": "󰖁",
-    "format-icons": {
-      "default": ["", "", ""]
-    },
-    "scroll-step": 5,
-    "on-scroll-up": "swayosd-client --output-volume raise",
-    "on-scroll-down": "swayosd-client --output-volume lower",
-    "on-click": "pavucontrol",
-    "on-click-right": "swayosd-client --output-volume mute-toggle"
-  },
-
-  // Brightness slider (SwayOSD)
-  "backlight": {
-    "format": "{icon} {percent}%",
-    "format-icons": ["", "", "", "", ""],
-    "on-scroll-up": "swayosd-client --brightness raise",
-    "on-scroll-down": "swayosd-client --brightness lower"
-  },
-
-  // Notification center with DND
-  "custom/notification": {
-    "tooltip": false,
+  "ext/workspaces": {
     "format": "{icon}",
-    "format-icons": {
-      "notification": "󱅫",
-      "none": "󰂚",
-      "dnd-notification": "󱅫",
-      "dnd-none": "󰂛",
-      "inhibited-notification": "󱅫",
-      "inhibited-none": "󰂚",
-      "dnd-inhibited-notification": "󱅫",
-      "dnd-inhibited-none": "󰂛"
-    },
-    "return-type": "json",
-    "exec-if": "which swaync-client",
-    "exec": "swaync-client -swb",
-    "on-click": "swaync-client -t -sw",
-    "on-click-right": "swaync-client -d -sw",
-    "escape": true
+    "ignore-hidden": false,
+    "on-click": "activate",
+    "sort-by-id": true
   },
-
-  // Power menu
-  "custom/power": {
-    "format": "⏻",
-    "tooltip-format": "Power menu",
-    "on-click": "~/.config/waybar/scripts/power-menu.sh",
-    "tooltip": true
+  "dwl/tags": {
+    "num-tags": 9
+  },
+  "dwl/window#layout": {
+    "format": "[{layout}]"
+  },
+  "dwl/window#title": {
+    "format": "{title}"
+  },
+  "custom/sep": {
+    "format": "|",
+    "interval": 0
   }
 }
