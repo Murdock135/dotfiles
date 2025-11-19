@@ -143,16 +143,18 @@
 
   // Bluetooth
   "bluetooth": {
-    "format": "",
+    "format": " {status}",
     "format-disabled": "󰂲",
+    "format-off": "󰂲",
+    "format-on": "",
     "format-connected": " {num_connections}",
-    "tooltip-format": "{controller_alias}\t{controller_address}",
-    "tooltip-format-connected": "{controller_alias}\t{controller_address}\n\n{device_enumerate}",
+    "tooltip-format": "{controller_alias}\t{controller_address}\n{status}",
+    "tooltip-format-connected": "{controller_alias}\t{controller_address}\n\n{num_connections} connected\n\n{device_enumerate}",
     "tooltip-format-enumerate-connected": "{device_alias}\t{device_address}",
     "on-click": "blueman-manager"
   },
 
-  // Audio with volume slider
+  // Audio with volume slider (SwayOSD)
   "pulseaudio": {
     "format": "{icon} {volume}%",
     "format-muted": "󰖁",
@@ -160,16 +162,18 @@
       "default": ["", "", ""]
     },
     "scroll-step": 5,
+    "on-scroll-up": "swayosd-client --output-volume raise",
+    "on-scroll-down": "swayosd-client --output-volume lower",
     "on-click": "pavucontrol",
-    "on-click-right": "pactl set-sink-mute @DEFAULT_SINK@ toggle"
+    "on-click-right": "swayosd-client --output-volume mute-toggle"
   },
 
-  // Brightness slider
+  // Brightness slider (SwayOSD)
   "backlight": {
     "format": "{icon} {percent}%",
     "format-icons": ["", "", "", "", ""],
-    "on-scroll-up": "brightnessctl set 5%+",
-    "on-scroll-down": "brightnessctl set 5%-"
+    "on-scroll-up": "swayosd-client --brightness raise",
+    "on-scroll-down": "swayosd-client --brightness lower"
   },
 
   // Notification center with DND
