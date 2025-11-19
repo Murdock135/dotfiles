@@ -75,12 +75,14 @@ window#waybar.empty #window {
 
 #ext-workspaces,
 #custom-arch,
+#quicklinks,
 #network,
 #bluetooth,
 #pulseaudio,
 #backlight,
 #battery,
 #clock,
+#custom-notification,
 #custom-power {
   background-color: @surface;
   border-radius: 999px;
@@ -97,12 +99,23 @@ window#waybar.empty #window {
 }
 
 #custom-arch,
+#custom-notification,
 #custom-power {
   font-size: 24px;
   min-width: 32px;
   min-height: 32px;
   padding-right: 4px;
   border-radius: 999px;
+}
+
+/* Quicklinks styling */
+#custom-quicklink1,
+#custom-quicklink2,
+#custom-quicklink3,
+#custom-quicklink4,
+#custom-quicklink5 {
+  font-size: 1.5rem;
+  margin: 0 0.5rem;
 }
 
 #ext-workspaces button {

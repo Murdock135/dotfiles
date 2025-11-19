@@ -12,6 +12,7 @@
 
   "modules-left": [
     "custom/arch",
+    "group/quicklinks",
     "ext/workspaces",
     "tray",
     "dwl/window"
@@ -24,41 +25,87 @@
     "backlight",
     "battery",
     "clock",
+    "custom/notification",
     "custom/power"
   ],
 
+  // Arch icon - shows fastfetch on click
   "custom/arch": {
-    "format": "",
-    "tooltip": false,
-    "on-click": "rofi -show drun"
+    "format": "󰣇",
+    "tooltip-format": "Show system info",
+    "on-click": "alacritty -e fastfetch",
+    "tooltip": true
   },
 
+  // Pinned apps quicklinks
+  "custom/quicklink1": {
+    "format": "󰈹",
+    "on-click": "firefox",
+    "tooltip-format": "Firefox"
+  },
+  "custom/quicklink2": {
+    "format": "🐟",
+    "on-click": "alacritty",
+    "tooltip-format": "Alacritty"
+  },
+  "custom/quicklink3": {
+    "format": "󰉋",
+    "on-click": "dolphin",
+    "tooltip-format": "Dolphin"
+  },
+  "custom/quicklink4": {
+    "format": "",
+    "on-click": "rofi -show drun",
+    "tooltip-format": "Rofi"
+  },
+  "custom/quicklink5": {
+    "format": "󱓷",
+    "on-click": "obsidian",
+    "tooltip-format": "Obsidian"
+  },
+
+  "group/quicklinks": {
+    "orientation": "horizontal",
+    "modules": [
+      "custom/quicklink1",
+      "custom/quicklink2",
+      "custom/quicklink3",
+      "custom/quicklink4",
+      "custom/quicklink5"
+    ]
+  },
+
+  // Workspaces
   "ext/workspaces": {
     "format": "{id}",
     "on-click": "activate",
     "sort-by-id": true
   },
 
+  // Window title
   "dwl/window": {
     "format": "{title}",
     "max-length": 50,
     "rewrite": {
       "(.*) — Mozilla Firefox": "🌎 $1",
-      "(.*) - fish": "> [$1]"
+      "(.*) - fish": "> [$1]",
+      "(.*) - Obsidian": "󱓷 $1"
     },
     "separate-outputs": false
   },
 
+  // System tray
   "tray": {
     "icon-size": 18,
     "spacing": 8
   },
 
+  // Clock
   "clock": {
     "interval": 60,
-    "format": "{:%a %d %b  %H:%M}",
-    "format-alt": "{:%Y-%m-%d  %H:%M:%S}",
-    "tooltip-format": "<tt><small>{calendar}</small></tt>",
+    "format": "󰥔 {:%H:%M}",
+    "format-alt": "󰥔 {:%H:%M}   {:%d-%m-%Y}",
+    "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
     "calendar": {
       "mode": "month",
       "format": {
@@ -67,6 +114,7 @@
     }
   },
 
+  // Battery
   "battery": {
     "states": {
       "warning": 30,
@@ -78,16 +126,22 @@
     "format-icons": ["", "", "", "", ""]
   },
 
+  // Network with WiFi signal strength and speeds
   "network": {
-    "format-wifi": " ",
-    "format-ethernet": "󰈀",
+    "format": "{ifname}",
+    "format-wifi": "{icon} {signalStrength}%  {bandwidthDownBytes}  {bandwidthUpBytes}",
+    "format-ethernet": "󰈀 {bandwidthDownBytes}  {bandwidthUpBytes}",
     "format-disconnected": "󰖪",
-    "tooltip-format-wifi": "{essid} ({signalStrength}%)\n{ipaddr}/{cidr}",
-    "tooltip-format-ethernet": "{ifname}\n{ipaddr}/{cidr}",
+    "format-icons": ["󰤯", "󰤟", "󰤢", "󰤥", "󰤨"],
+    "tooltip-format-wifi": "{essid} ({signalStrength}%)\n{ipaddr}/{cidr}\nDown: {bandwidthDownBytes}\nUp: {bandwidthUpBytes}",
+    "tooltip-format-ethernet": "{ifname}\n{ipaddr}/{cidr}\nDown: {bandwidthDownBytes}\nUp: {bandwidthUpBytes}",
     "tooltip-format-disconnected": "Disconnected",
-    "on-click": "~/.config/waybar/scripts/network-menu.sh"
+    "interval": 1,
+    "max-length": 50,
+    "on-click": "nm-connection-editor"
   },
 
+  // Bluetooth
   "bluetooth": {
     "format": "",
     "format-disabled": "󰂲",
@@ -95,9 +149,10 @@
     "tooltip-format": "{controller_alias}\t{controller_address}",
     "tooltip-format-connected": "{controller_alias}\t{controller_address}\n\n{device_enumerate}",
     "tooltip-format-enumerate-connected": "{device_alias}\t{device_address}",
-    "on-click": "~/.config/waybar/scripts/bluetooth-menu.sh"
+    "on-click": "blueman-manager"
   },
 
+  // Audio with volume slider
   "pulseaudio": {
     "format": "{icon} {volume}%",
     "format-muted": "󰖁",
@@ -106,20 +161,44 @@
     },
     "scroll-step": 5,
     "on-click": "pavucontrol",
-    "on-click-right": "~/.config/waybar/scripts/volume-menu.sh"
+    "on-click-right": "pactl set-sink-mute @DEFAULT_SINK@ toggle"
   },
 
+  // Brightness slider
   "backlight": {
     "format": "{icon} {percent}%",
     "format-icons": ["", "", "", "", ""],
     "on-scroll-up": "brightnessctl set 5%+",
-    "on-scroll-down": "brightnessctl set 5%-",
-    "on-click": "~/.config/waybar/scripts/brightness-menu.sh"
+    "on-scroll-down": "brightnessctl set 5%-"
   },
 
+  // Notification center with DND
+  "custom/notification": {
+    "tooltip": false,
+    "format": "{icon}",
+    "format-icons": {
+      "notification": "󱅫",
+      "none": "󰂚",
+      "dnd-notification": "󱅫",
+      "dnd-none": "󰂛",
+      "inhibited-notification": "󱅫",
+      "inhibited-none": "󰂚",
+      "dnd-inhibited-notification": "󱅫",
+      "dnd-inhibited-none": "󰂛"
+    },
+    "return-type": "json",
+    "exec-if": "which swaync-client",
+    "exec": "swaync-client -swb",
+    "on-click": "swaync-client -t -sw",
+    "on-click-right": "swaync-client -d -sw",
+    "escape": true
+  },
+
+  // Power menu
   "custom/power": {
     "format": "⏻",
-    "tooltip": false,
-    "on-click": "~/.config/waybar/scripts/power-menu.sh"
+    "tooltip-format": "Power menu",
+    "on-click": "~/.config/waybar/scripts/power-menu.sh",
+    "tooltip": true
   }
 }
