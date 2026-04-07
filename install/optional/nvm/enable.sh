@@ -8,22 +8,24 @@ if command -v nvm >/dev/null 2>&1; then
 fi
 
 # install nvm if not present
-if [ ! -d "${NVM_DIR:-$HOME/.nvm}" ]; then
+NVM_INSTALL_DIR="${HOME}/.nvm"
+if [ ! -f "${NVM_INSTALL_DIR}/nvm.sh" ]; then
   echo "Installing nvm..."
+  unset NVM_DIR
   curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.4/install.sh | bash
 else
-  echo "nvm directory found but nvm is not on PATH. Skipping install."
+  echo "nvm already installed at ${NVM_INSTALL_DIR}. Skipping install."
 fi
 
 # configuration
 BLOCK_BEGIN="# >>> NVM configuration (managed by dotfiles) >>>"
 BLOCK_END="# <<< NVM configuration (managed by dotfiles) <<<"
 
-read -r -d '' NVM_BLOCK <<'EOF'
-# >>> NVM configuration (managed by dotfiles) >>>"
+read -r -d '' NVM_BLOCK <<'EOF' || true
+# >>> NVM configuration (managed by dotfiles) >>>
 export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
-# <<< NVM configuration (managed by dotfiles) <<<"
+# <<< NVM configuration (managed by dotfiles) <<<
 EOF
 
 # Ask user preference for profile file

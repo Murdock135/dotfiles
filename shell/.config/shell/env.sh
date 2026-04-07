@@ -1,6 +1,6 @@
 # NVM related
 # Set where NVM will store installed Node versions
-export NVM_DIR="${XDG_CONFIG_HOME:-$HOME}/nvm"
+export NVM_DIR="$HOME/.nvm"
 
 # workaround for known issue: 'nvm disables hashing' for some distros (see https://github.com/nvm-sh/nvm/issues/2065)
 prev_hashall=0
