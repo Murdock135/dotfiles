@@ -46,3 +46,12 @@ Optionally, if you want to fully purge the config (deletes the config files from
 ```
 bash install/optional/<package>/disable.sh --unstow --purge
 ```
+
+# TODOS
+
+1. Neovim set up prerequisites
+    - [ ] Python language server (handled by a script that uses uv)
+    - [ ] Cargo (`install/optional/`)
+    - [ ] Lua language server (all brewfiles)
+2. Improve docs
+    - [ ] Specify which package manager installs what for each OS (e.g. if on WSL, neovim installed by homebrew, if on Arch, neovim installed by yay, etc.). Create a table

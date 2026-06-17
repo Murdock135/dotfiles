@@ -56,3 +56,10 @@ And you're set!
   3. Options
   4. LSP
   5. Colorscheme
+
+# TODOS
+
+## Migrate from nvim-cmp -> blink
+
+- [x] Install Cargo
+- [x] Update Neovim to 12.+
