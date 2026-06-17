@@ -1,6 +1,8 @@
-vim.keymap.set('n', '<C-w> <C-w>', ':Neotree toggle<CR>', { noremap = true , silent = true }, { desc = "Toggle Neotree" })
+-- Neotree
+vim.keymap.set('n', '<leader>no', ':Neotree toggle<CR>', { noremap = true, silent = true, desc = "Toggle Neotree" })
+vim.keymap.set('n', '<leader>nc', ':Neotree close<CR>', { noremap = true, silent = true, desc = "Close Neotree" })
 
---telescope
+-- telescope
 local builtin = require('telescope.builtin')
 vim.keymap.set('n', '<leader>ff', builtin.find_files, { desc = 'Telescope find files' })
 vim.keymap.set('n', '<leader>fg', builtin.live_grep, { desc = 'Telescope live grep' })
