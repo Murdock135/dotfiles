@@ -13,7 +13,7 @@ return {
   settings = {
     pylsp = {
       plugins = {
-        pycodestyle = { maxLineLength = 88 }, -- Custom linting rules
+        pycodestyle = { enabled = false }, -- disable style nags (E3xx/W2xx); pyflakes still catches real errors
       },
     },
   },
