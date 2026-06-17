@@ -1,3 +1,5 @@
 -- vim.cmd.colorscheme("gruvbox-material")
-vim.cmd.colorscheme("wolf359")
+-- vim.cmd.colorscheme("wolf359")
 -- vim.cmd.colorscheme("neofusion")
+-- vim.cmd.colorscheme("github_light_high_contrast")
+vim.cmd.colorscheme("oldworld")
