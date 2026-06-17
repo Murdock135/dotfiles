@@ -14,6 +14,7 @@ return {
     pylsp = {
       plugins = {
         pycodestyle = { enabled = false }, -- disable style nags (E3xx/W2xx); pyflakes still catches real errors
+        flake8 = { enabled = true },
       },
     },
   },

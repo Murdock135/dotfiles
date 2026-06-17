@@ -15,14 +15,22 @@ return {
 		"selene.yml",
 		"stylua.toml",
 	},
-	-- settings = {
-	--     Lua = {
-	--         diagnostics = {
-	--             --     disable = { "missing-parameters", "missing-fields" },
-	--         },
-	--     },
-	-- },
 
-	single_file_support = true,
-	log_level = vim.lsp.protocol.MessageType.Warning,
+  -- Server-specific configurations parsed by lua_ls
+  settings = {
+    Lua = {
+      diagnostics = {
+        -- Explicitly inform the linter that 'vim' is an authorized global variable
+        globals = { "vim" },
+      },
+      workspace = {
+        -- Pull in Neovim's internal runtime paths to enable API autocompletion
+        library = vim.api.nvim_get_runtime_file("", true),
+        checkThirdParty = false,
+      },
+      telemetry = {
+        enable = false,
+      },
+    },
+  },
 }
