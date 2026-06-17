@@ -20,4 +20,15 @@ return {
       transparent_mode = true,
     },
   },
+  {
+    "projekt0n/github-nvim-theme",
+    name = 'github-theme',
+    lazy = false,
+    priority = 1000,
+  },
+  {
+    "ShiraiEd/Wolf359_nvim_rust_theme",
+    lazy = false,
+    priority = 1000,
+  },
 }
