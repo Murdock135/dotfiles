@@ -46,7 +46,7 @@ chmod +x ./mac/*.sh
 4. Stow shell shims
 
 ```
-cd ~/mydotfiles
+cd <wherever you cloned this repo>
 stow -t "$HOME" mac/home 
 ```
 
@@ -65,7 +65,7 @@ ls -l ~/.bash_profile ~/.bashrc
 # To apply changes in the Brewfile
 
 ```
-brew bundle --file=~/mydotfiles/mac/Brewfile
+brew bundle --file="$DOTFILES_DIR/mac/Brewfile"   # exported by env.sh; otherwise substitute wherever you cloned this repo
 ```
 
 # To reapply dotfiles symlinks with stow

@@ -3,7 +3,7 @@
 To enable any package, simply run 
 
 ```
-cd ~/mydotfiles
+cd "$DOTFILES_DIR"   # exported by env.sh once shell/ is stowed and loaded; otherwise cd into wherever you cloned this repo
 bash install/optional/<package>/enable.sh
 ```
 
