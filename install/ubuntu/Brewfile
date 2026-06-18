@@ -1,3 +1,4 @@
 brew "neovim"
+brew "lua-language-server"
 cask "font-fira-code-nerd-font"
 cask "font-droid-sans-mono-nerd-font"

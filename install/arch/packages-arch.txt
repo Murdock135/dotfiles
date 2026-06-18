@@ -3,6 +3,7 @@ uv
 eza
 ripgrep
 fd
+lua-language-server
 starship
 git
 github-cli
