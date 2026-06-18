@@ -51,3 +51,11 @@ fi
 if command -v mise >/dev/null 2>&1; then
   eval "$(mise activate bash)"
 fi
+
+# Cargo/Rust (optional, see install/optional/cargo/enable.sh, which installs
+# via rustup with --no-modify-path so it doesn't also self-append an
+# activation line to a shell profile). Single source of truth for activation,
+# guarded so it's a no-op if not installed.
+if [ -f "$HOME/.cargo/env" ]; then
+  . "$HOME/.cargo/env"
+fi
