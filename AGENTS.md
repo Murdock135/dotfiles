@@ -57,4 +57,4 @@ This repository is designed for automating and standardizing development environ
 
 ---
 
-For more details, see [.github/copilot-instructions.md](.github/copilot-instructions.md) and the main [README.md](README.md).
+For more details, see [.github/copilot-instructions.md](.github/copilot-instructions.md), the main [README.md](README.md), and [ARCHITECTURE.md](ARCHITECTURE.md) for the design patterns and conventions this repo follows (DOTFILES_DIR auto-detection, env.sh as the single source of truth for shell activation, core-vs-optional packages, managed blocks, etc.) — read it before adding new scripts so new code follows the same conventions.

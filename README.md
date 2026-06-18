@@ -1,5 +1,7 @@
 # Usage
 
+> See [ARCHITECTURE.md](ARCHITECTURE.md) for the design patterns this repo follows (DOTFILES_DIR auto-detection, env.sh as the single source of truth for shell activation, core-vs-optional packages, managed blocks) — worth reading before adding new scripts.
+
 1. Clone the repo with `git clone https://github.com/Murdock135/mydotfiles.git`
 2. Move into the directory (e.g. `cd dotfiles` if you didn't rename it — every script in this repo auto-detects the repo root via `git`, so the directory name itself doesn't actually matter, see `lib/common.sh`)
 3. Install packages for your OS:
