@@ -3,21 +3,26 @@
 
 BASHRC="$HOME/.bashrc"
 LOAD_FILE='$HOME/.config/shell/load.sh'   # keep $HOME literal
-SOURCE_LINE=". $LOAD_FILE"
+BLOCK_BEGIN="# >>> shell-load (managed by dotfiles) >>>"
+BLOCK_END="# <<< shell-load (managed by dotfiles) <<<"
 
 install_into_bashrc() {
   # Create ~/.bashrc if missing
   [ -f "$BASHRC" ] || : >"$BASHRC"
 
-  # Look for any line that sources ~/.config/shell/load.sh (plain or guarded)
-  if ! grep -Eq '\. *(\$HOME|'"$HOME"')/\.config/shell/load\.sh' "$BASHRC"; then
-    {
-      echo ""
-      echo "# Layer custom shell config"
-      echo "[ -f \"$LOAD_FILE\" ] && . \"$LOAD_FILE\""
-    } >>"$BASHRC"
-    echo "Added sourcing of custom shell config to $BASHRC"
+  # Exact, literal match — avoids false negatives from quoting variations
+  # that previously made re-running this appendable indefinitely.
+  if grep -Fq "$BLOCK_BEGIN" "$BASHRC"; then
+    echo "Sourcing of custom shell config already present in $BASHRC"
+    return 0
   fi
+
+  {
+    printf '\n%s\n' "$BLOCK_BEGIN"
+    printf '%s\n' "[ -f \"$LOAD_FILE\" ] && . \"$LOAD_FILE\""
+    printf '%s\n' "$BLOCK_END"
+  } >>"$BASHRC"
+  echo "Added sourcing of custom shell config to $BASHRC"
 }
 
 # If executed directly, run the installer step and exit
