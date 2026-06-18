@@ -2,7 +2,12 @@
 
 1. Clone the repo with `git clone https://github.com/Murdock135/mydotfiles.git`
 2. Move into the directory (e.g. `cd dotfiles` if you didn't rename it — every script in this repo auto-detects the repo root via `git`, so the directory name itself doesn't actually matter, see `lib/common.sh`)
-3. Stow the packages. (Look into each package to know what you are importing!)
+3. Install packages for your OS:
+   - **Arch**: follow [install/arch/README.md](install/arch/README.md)
+   - **Ubuntu**: follow [install/ubuntu/README.md](install/ubuntu/README.md)
+   - **macOS**: follow [mac/README.md](mac/README.md) — note that walkthrough already covers stowing your shell config and the rest of your dotfiles, so once you've finished it you can skip directly to step 5 below
+
+4. Stow the packages (Arch/Ubuntu — if you followed the macOS guide above, this is already done). Look into each package to know what you are importing!
 
 ```
 stow -v shell
@@ -16,7 +21,7 @@ stow -v git
 > > [!NOTE]
 > If stow warns you that the same files already exist in your machine (predesigned configs), you have to make a choice between (1) using these configs (2) using the pre-existing configs (3) make a 'balancing act' and using some from each. (1) is easiest. Simply delete the predesigned configs and use the stow command again. I personally had to do this because I am using [Omarchy](https://omarchy.org/), which ships with its own `keymaps.lua` and `options.lua`. 
 
-4. Load aliases and functions
+5. Load aliases and functions (Arch/Ubuntu — macOS already gets this wired up automatically by `mac/init.sh`)
 ```
 ~/.config/shell/load.sh
 ```
