@@ -1,49 +1,34 @@
-
 #!/usr/bin/env bash
 set -euo pipefail
 
 # ------------------------------------------------------------------------------
-# Usage: disable.sh
+# Usage: disable.sh [--purge]
 #
-# Removes the NVM configuration block from common shell profiles.
-# Edit the PROFILES array below to customize which files are checked.
+# nvm's activation lives in shell/.config/shell/env.sh (this repo's single
+# source of truth for shell activation), guarded by a check for
+# ~/.nvm/nvm.sh. There is no shell-profile block for this script to remove --
+# nvm is "disabled" simply by not being installed.
+#
+# --purge actually removes the installed nvm directory.
 # ------------------------------------------------------------------------------
 
-# List of shell profiles to check (edit as needed)
-PROFILES=("$HOME/.bash_profile" "$HOME/.profile" "$HOME/.bashrc" "$HOME/.zshrc")
+PURGE=false
+case "${1:-}" in
+  --purge) PURGE=true ;;
+  "") ;;
+  *) echo "Usage: disable.sh [--purge]" >&2; exit 2 ;;
+esac
 
-BLOCK_BEGIN="# >>> NVM configuration (managed by dotfiles) >>>"
-BLOCK_END="# <<< NVM configuration (managed by dotfiles) <<<"
+TARGET_NVM_DIR="${NVM_DIR:-$HOME/.nvm}"
 
-remove_nvm_block() {
-  local target_file="$1"
-  # Skip if file doesn't exist
-  if [ ! -f "$target_file" ]; then
-    echo "Skipping $target_file (does not exist)"
-    return 0
+if $PURGE; then
+  if [ -d "$TARGET_NVM_DIR" ]; then
+    echo "Purging $TARGET_NVM_DIR ..."
+    rm -rf "$TARGET_NVM_DIR"
+  else
+    echo "$TARGET_NVM_DIR not found; nothing to purge."
   fi
-  # Check if block exists
-  if ! grep -Fq "$BLOCK_BEGIN" "$target_file"; then
-    echo "No NVM block found in $target_file"
-    return 0
-  fi
-  # Remove managed block using awk
-  local tmpfile
-  tmpfile="$(mktemp "${target_file}.XXXX")"
-  trap 'rm -f "$tmpfile"' EXIT
-  awk -v start="$BLOCK_BEGIN" -v end="$BLOCK_END" '
-    $0 == start { skip=1; next }
-    $0 == end { skip=0; next }
-    !skip { print }
-  ' "$target_file" > "$tmpfile"
-  mv "$tmpfile" "$target_file"
-  trap - EXIT
-  echo "Removed NVM block from $target_file"
-}
-
-
-for profile in "${PROFILES[@]}"; do
-  remove_nvm_block "$profile"
-done
-
-echo "NVM configuration block removal complete."
+else
+  echo "nvm has no shell-profile block to remove -- activation in env.sh is already a no-op once $TARGET_NVM_DIR is gone."
+  echo "Run 'disable.sh --purge' to remove $TARGET_NVM_DIR and fully uninstall nvm."
+fi

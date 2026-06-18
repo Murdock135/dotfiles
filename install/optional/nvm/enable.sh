@@ -12,38 +12,14 @@ NVM_INSTALL_DIR="${HOME}/.nvm"
 if [ ! -f "${NVM_INSTALL_DIR}/nvm.sh" ]; then
   echo "Installing nvm..."
   unset NVM_DIR
-  curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.4/install.sh | bash
+  # PROFILE=/dev/null tells nvm's installer to skip auto-appending its own
+  # activation snippet to a shell profile. env.sh is this repo's single
+  # source of truth for nvm activation (shell/.config/shell/env.sh) --
+  # without this, the installer would write a second, unmanaged copy of
+  # the same activation logic straight into ~/.bashrc.
+  curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.4/install.sh | PROFILE=/dev/null bash
 else
   echo "nvm already installed at ${NVM_INSTALL_DIR}. Skipping install."
 fi
 
-# configuration
-BLOCK_BEGIN="# >>> NVM configuration (managed by dotfiles) >>>"
-BLOCK_END="# <<< NVM configuration (managed by dotfiles) <<<"
-
-read -r -d '' NVM_BLOCK <<'EOF' || true
-# >>> NVM configuration (managed by dotfiles) >>>
-export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
-# <<< NVM configuration (managed by dotfiles) <<<
-EOF
-
-# Ask user preference for profile file
-echo "Which profile do you use?"
-echo "  1) .bash_profile"
-echo "  2) .profile"
-read -rp "Enter choice [1-2]: " choice
-
-case "$choice" in
-  1) PROFILE="$HOME/.bash_profile" ;;
-  2) PROFILE="$HOME/.profile" ;;
-  *) echo "Invalid choice. Exiting."; exit 1 ;;
-esac
-
-# Add NVM block to profile if not already present
-if grep -qF "$BLOCK_BEGIN" "$PROFILE" 2>/dev/null; then
-  echo "NVM configuration block already exists in $PROFILE. Skipping."
-else
-  printf '\n%s\n' "$NVM_BLOCK" >> "$PROFILE"
-  echo "NVM configuration added to $PROFILE."
-fi
+echo "nvm installed. It will be activated automatically by shell/.config/shell/env.sh."
