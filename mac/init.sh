@@ -1,4 +1,4 @@
-#!/bin/zsh
+#!/usr/bin/env bash
 # =============================================================================
 # init.sh
 # -----------------------------------------------------------------------------
@@ -38,18 +38,11 @@ else
 fi
 
 # 3) Symlink .bashrc and .bash_profile into ~
-REPO_ROOT="$(cd "$(dirname "$0")/.." && pwd -P)"
-echo "REPO_ROOT: $REPO_ROOT"
-printf "Is this the correct root directory for your dotfiles? (y/n): "
-read -r response
-case "$response" in
-  y|Y) ;; 
-  n|N) echo "Exiting. Please adjust REPO_ROOT logic and rerun."; exit 1 ;;
-  *)   echo "Invalid response. Please answer y or n."; exit 1 ;;
-esac
+source "$(dirname "$0")/../lib/common.sh"
+echo "DOTFILES_DIR: $DOTFILES_DIR"
 
-SRC_BASHRC="$REPO_ROOT/mac/home/.bashrc"
-SRC_PROFILE="$REPO_ROOT/mac/home/.bash_profile"
+SRC_BASHRC="$DOTFILES_DIR/mac/home/.bashrc"
+SRC_PROFILE="$DOTFILES_DIR/mac/home/.bash_profile"
 
 if [[ ! -f "$SRC_BASHRC" || ! -f "$SRC_PROFILE" ]]; then
   echo "❌ Expected shim files not found:"

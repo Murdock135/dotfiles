@@ -7,15 +7,8 @@
 # =============================================================================
 set -euo pipefail
 
-DOTFILES_DIR="${DOTFILES_DIR:-$HOME/mydotfiles}"
-
-# Print the dotfile directory and ask for confirmation
-echo "Your dotfile directory is: $DOTFILES_DIR"
-read -p "Is this the correct directory? (y/n): " answer
-if [[ "$answer" != "y" && "$answer" != "Y" ]]; then
-  echo "Please manually change DOTFILES_DIR in <dotfiledir>/mac/install_packages.sh and try again."
-  exit 1
-fi
+source "$(dirname "${BASH_SOURCE[0]}")/../../lib/common.sh"
+echo "Dotfiles directory: $DOTFILES_DIR"
 
 BREWFILE_PATH="$DOTFILES_DIR/install/ubuntu/Brewfile"
 

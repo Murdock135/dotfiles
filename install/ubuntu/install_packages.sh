@@ -1,8 +1,7 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-# Determine DOTFILES_DIR if not already set
-DOTFILES_DIR="${DOTFILES_DIR:-$(cd "$(dirname "${BASH_SOURCE[0]}")/../.." >/dev/null 2>&1 && pwd)}"
+source "$(dirname "${BASH_SOURCE[0]}")/../../lib/common.sh"
 
 # Path to the Ubuntu packages list
 PACKAGES_UBUNTU_PATH="$DOTFILES_DIR/install/ubuntu/packages-ubuntu.txt"

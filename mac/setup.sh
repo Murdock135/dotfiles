@@ -7,16 +7,11 @@
 # =============================================================================
 set -euo pipefail
 
-DOTFILES_DIR="${DOTFILES_DIR:-$HOME/dotfiles}"
+source "$(dirname "$0")/../lib/common.sh"
 PACKAGES=(git nvim shell alacritty) # extend as needed
 
 if ! command -v stow >/dev/null 2>&1; then
   echo "❌ stow not installed. Run ./mac/install_packages.sh first or install stow manually."
-  exit 1
-fi
-
-if [[ ! -d "$DOTFILES_DIR" ]]; then
-  echo "❌ Dotfiles repo not found at $DOTFILES_DIR"
   exit 1
 fi
 
