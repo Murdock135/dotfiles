@@ -24,8 +24,6 @@ chmod +x ./mac/*.sh
    ```sh
    ./mac/init.sh
 
-- Runs under zsh (default macOS shell).
-
 - Installs Xcode Command Line Tools if not already installed.
 
 - Sets /bin/bash as your login shell (log out / back in to take effect)
@@ -73,6 +71,16 @@ brew bundle --file=~/mydotfiles/mac/Brewfile
 # To reapply dotfiles symlinks with stow
 
 `./mac/setup.sh`
+
+# Post-install: starting the Ollama service
+
+`ollama` is installed via the Brewfile, but unlike `starship`/`mise` (which only need
+per-shell activation, handled automatically by `shell/.config/shell/env.sh`), it's a
+background service and deliberately isn't auto-started on every shell. Start it manually:
+
+```
+brew services start ollama
+```
 
 # Quick verification
 
