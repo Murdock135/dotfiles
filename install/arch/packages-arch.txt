@@ -1,6 +1,8 @@
 python
 uv
 eza
+ripgrep
+fd
 starship
 git
 github-cli
@@ -16,6 +18,7 @@ curl
 wget
 gzip
 htop
+wl-clipboard
 alacritty
 discord
 zen-browser-bin

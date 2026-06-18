@@ -2,6 +2,9 @@ gcc
 luarocks
 astral-uv
 eza
+ripgrep
+fd-find
+xclip
 starship
 git
 github-cli

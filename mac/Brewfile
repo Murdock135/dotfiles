@@ -9,6 +9,7 @@ brew "ollama"
 brew "mise"
 brew "starship"
 brew "ripgrep"
+brew "fd"
 
 brew "lua-language-server"
 brew "python-lsp-server"

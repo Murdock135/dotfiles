@@ -39,4 +39,16 @@ while IFS= read -r package; do
     fi
 done < "$PACKAGES_UBUNTU_PATH"
 
+# Debian/Ubuntu packages `fd` as `fd-find`, installing a binary named
+# `fdfind` instead of `fd` (name conflict with an existing package). Tools
+# that exec `fd` directly as a subprocess (e.g. Neovim's Telescope) don't
+# go through interactive shell aliases, so a real symlink in PATH is needed,
+# not just an alias. ~/.local/bin is on PATH by default via Ubuntu's stock
+# ~/.profile.
+if command -v fdfind >/dev/null 2>&1 && ! command -v fd >/dev/null 2>&1; then
+    echo "Symlinking fdfind -> fd in ~/.local/bin"
+    mkdir -p "$HOME/.local/bin"
+    ln -sf "$(command -v fdfind)" "$HOME/.local/bin/fd"
+fi
+
 echo "Package installation complete!"

@@ -3,6 +3,13 @@ alias szsh='source ~/.zshrc'
 alias src='[ -n "$ZSH_VERSION" ] && source ~/.zshrc || source ~/.bashrc'
 
 alias tree="eza --tree --level=3 -la --group-directories-first --ignore-glob='.git'"
+
+# Fallback for the fd-find/fdfind naming quirk (see install_packages.sh,
+# which symlinks fdfind -> fd into ~/.local/bin as the real fix; this alias
+# only covers interactive use if that symlink is somehow missing).
+if command -v fdfind >/dev/null 2>&1 && ! command -v fd >/dev/null 2>&1; then
+  alias fd='fdfind'
+fi
 alias ag='alias | grep'
 
 # Git
