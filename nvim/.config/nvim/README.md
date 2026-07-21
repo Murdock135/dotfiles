@@ -6,14 +6,16 @@ To make this work fully and out of the box, you need -
 
 1. git
 2. curl
-3. A clipboard provider (e.g., xclip, xsel)
-4. A nerd font (e.g., FiraCode Nerd Font)
-5. ripgrep
-6. fd
-7. Python
-8. A package manager for python Pypi packages (e.g., pip, uv (recommended))
-9. Python-language-server
-10. The Lua language server
+3. tar
+4. tree-sitter-cli
+5. A clipboard provider (e.g., xclip, xsel)
+6. A nerd font (e.g., FiraCode Nerd Font)
+7. ripgrep
+8. fd
+9. Python
+10. A package manager for python Pypi packages (e.g., pip, uv (recommended))
+11. Python-language-server
+12. The Lua language server
 
 # Set up
 

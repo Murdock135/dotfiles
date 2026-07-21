@@ -37,6 +37,7 @@ alias dots='cd "${DOTFILES_DIR:-$HOME/dotfiles}"'
 alias config="eza -la ~/.config/"
 alias where='pwd'
 alias alacrittyconf='vi ~/.config/alacritty/alacritty.toml'
+
 # WSL navigation
 alias win_home='cd /mnt/c/Users/Zayan'
 
