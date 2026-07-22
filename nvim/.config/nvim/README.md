@@ -14,7 +14,9 @@ To make this work fully and out of the box, you need -
 8. fd
 9. Python
 10. A package manager for python Pypi packages (e.g., pip, uv (recommended))
-11. Python-language-server
+11. Python language servers (install into your project's virtual environment): 
+    - pyright
+    - pylsp 
 12. The Lua language server
 
 # Set up
@@ -58,10 +60,3 @@ And you're set!
   3. Options
   4. LSP
   5. Colorscheme
-
-# TODOS
-
-## Migrate from nvim-cmp -> blink
-
-- [x] Install Cargo
-- [x] Update Neovim to 12.+
