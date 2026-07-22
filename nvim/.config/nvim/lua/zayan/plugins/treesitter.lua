@@ -6,6 +6,7 @@ local parsers = {
 	"query",
 	"markdown",
 	"bash",
+	"python",
 }
 
 return {
