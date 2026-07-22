@@ -2,7 +2,17 @@
 -- vim.lsp.enable('lua_ls')
 
 -- 1. Globally enable your desired language servers
-local servers = { "pylsp", "lua_ls" }
+local servers = { "lua_ls" }
+
+-- basedpyright is a per-project uv dev-dependency (see lsp/basedpyright.lua), not a global
+-- install, so fall back to pylsp when neither a local .venv nor a global install is found
+local function has_basedpyright()
+  local venv_langserver = vim.fn.getcwd() .. "/.venv/bin/basedpyright-langserver"
+  return vim.uv.fs_stat(venv_langserver) ~= nil or vim.fn.executable("basedpyright-langserver") == 1
+end
+
+table.insert(servers, has_basedpyright() and "basedpyright" or "pylsp")
+
 for _, server in ipairs(servers) do
   -- As documented under |vim.lsp.enable()|, this activates the config for current and future buffers
   vim.lsp.enable(server)
