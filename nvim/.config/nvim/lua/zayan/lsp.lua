@@ -22,7 +22,7 @@ end
 -- As documented under |lsp-diagnostic|, use vim.diagnostic.config() to customize rendering
 vim.diagnostic.config({
   virtual_line = true,
-  virtual_text = true, -- Re-enabling (native default became false in v0.11+)
+  -- virtual_text = true, -- Re-enabling (native default became false in v0.11+)
   underline = true,
   severity_sort = true,
   signs = {

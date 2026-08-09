@@ -1,5 +1,7 @@
 vim.opt.relativenumber = true
-vim.opt.wrap = false
+vim.opt.cursorline = true
+vim.opt.cursorlineopt = "both"
+vim.opt.wrap = true
 vim.opt.winborder = 'rounded'
 vim.opt.clipboard = 'unnamedplus'
 vim.opt.tabstop = 2
